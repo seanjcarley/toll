@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700|Exo:100,200,300,400,500,600,700');
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+.capitalise {
+    text-transform: capitalize;
+}
+
+.center {
+    text-align: center;
+}
+
+.container-fluid {
+    margin: 0;
+    padding: 0;
+}
+
+.double {
+    scale: 200%;
+}
+
+footer {
+    color: white;
+    background-color: purple;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    flex: none;
+}
+
+header {
+    text-align: center;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+li a {
+    display: block;
+    text-decoration: none;
+
+}
+
+.logo {
+    color: purple;
+}
+
+.logo-font {
+    font-size: 3rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: purple;
+}
+
+.logo-font:hover {
+    text-decoration: none;
+}
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+.nav-item {
+    list-style-type: none;
+    height: 3rem;
+}
+.nav-ui-colour-1 {
+    color: #fff;
+    background-color: #800080;
+    text-align: center;
+    text-decoration: none;
+}
+
+.nav-ui-colour-2 {
+    color: #fff;
+    background-color: #990099;
+    text-align: center;
+    text-decoration: none;
+}
+
+.nav-ui-colour-3 {
+    color: #fff;
+    background-color: #b300b3;
+    text-align: center;
+    text-decoration: none;
+}
+
+.nav-ui-colour-4 {
+    color: #fff;
+    background-color: #cc00cc;
+    text-align: center;
+    text-decoration: none;
+}
+
+.navbar {
+    margin: 0;
+    padding: 0;
+}
+
+.no-dec {
+    text-decoration: none;   
+}
+
+section {
+    color: yellow;
+    background-color: green;
+}
+
+.section-side {
+    color: #800080;
+    background-color: #fff;
+}
+
+.side-nav {
+    list-style-type: none;
+    border: 0.2rem solid #fff;
+}
+
+.side-nav-button {
+    background-color: #800080;
+    color: #fff;
+    text-align: center;
+    border-bottom: 0.2rem solid #fff;
+}
+
+.side-nav-button:last-child {
+    border-bottom: none;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.vert-align {
+    margin: auto;
+}
+
+.vert-centre {
+    margin: 0;
+    position: inherit;
+    top: 33%;
+    -ms-transform: translateY(-33%);
+    transform: translateY(-33%);
+}
+
+
+/* @media queries  */
+/* x-small (eg: phone) */
+@media (max-width: 600px) {
+
+}
+
+/* small (eg: tablet in portrait orientation) */
+@media (min-width: 601px) and (max-width: 767px) {
+
+}
+
+/* medium (eg: tablet in landscape orientation) */
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/* large (eg: Laptop/desktop) */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/* x-large (eg: Large Laptop/desktop) */
+@media (min-width: 1200px) {
+
+}

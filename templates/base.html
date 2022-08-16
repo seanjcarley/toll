@@ -5,8 +5,8 @@
     <head>
         {% block meta %}
             <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- allows supprort for older IE versions -->
+            <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
         {% endblock %}
         {% block extra_meta %}{% endblock %}
         
@@ -30,11 +30,11 @@
     <body class="container">
         <header class="container-fluid">
             <div class="row no-gutters">
-                <a href="#" class="col-md-2 logo vert-align">
+                <a href="{% url 'account_login' %}" class="col-md-2 logo vert-align">
                     <i class="fa-solid fa-user double"></i>
                 </a>
                 <div class="col-md-8">
-                    <a href="#" class="logo-font vert-align">
+                    <a href="{% url 'index' %}" class="logo-font vert-align">
                         <h1 class="title">toll.ie</h1>
                     </a>
                 </div>
@@ -45,10 +45,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#" class="dropdown-item">Log In</a>
+                                <a href="{% url 'account_login' %}" class="dropdown-item">Log In</a>
                             </li>
                             <li>
-                                <a href="#" class="dropdown-item">Sign Up</a>
+                                <a href="{% url 'account_signup' %}" class="dropdown-item">Sign Up</a>
                             </li>
                             <li>
                                 <a href="#" class="dropdown-item">Pay-a-Toll</a>

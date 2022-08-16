@@ -23,12 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vsa01jw5$&_ah1m^=q^3o5hv%x-=lp3^havw$$e-fsf-sl#v8t'
+# SECRET_KEY = 'django-insecure-vsa01jw5$&_ah1m^=q^3o5hv%x-=lp3^havw$$e-fsf-sl#v8t'
+SECRET_KEY = os.environ['SECRET_KEY']
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# print('DEVELOPMENT' in os.environ)
-DEBUG = 'DEVELOPMENT' in os.environ
 # DEBUG = True
+DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     # additional apps
+    'crispy_forms',
     # user created apps
     'home',
 ]
@@ -80,6 +82,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'builtins':[
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]

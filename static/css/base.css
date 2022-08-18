@@ -7,6 +7,8 @@ a {
 
 body {
     font-family: "Roboto", sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
 .capitalise {
@@ -37,6 +39,7 @@ footer {
 
 header {
     text-align: center;
+    flex: none;
 }
 
 html {
@@ -111,8 +114,10 @@ li a {
 }
 
 section {
-    color: yellow;
-    background-color: green;
+    color: #fff;
+    background-color: #800080;
+    /*overflow-y: auto;*/
+    flex: auto;
 }
 
 .section-side {

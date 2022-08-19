@@ -1,3 +1,4 @@
+from distutils.archive_util import make_archive
 from itertools import filterfalse
 from django.db import models
 from django.contrib.auth.models import User
@@ -21,7 +22,11 @@ class UserProfile(models.Model):
     post_code = models.CharField(max_length=10, null=True, blank=True)
     country = CountryField(blank_label='Country', null=True, blank=True)
     phone = models.CharField(max_length=20, null=True, blank=True)
-
+    date_added = models.DateTimeField(null=False, blank=False)
+    date_removed = models.DateTimeField(null=True, blank=True)
+    update_date = models.DateTimeField(
+        null=False, blank=False, 
+        auto_now_add=True)
 
     def __str__(self):
         return self.user.username
@@ -29,14 +34,26 @@ class UserProfile(models.Model):
 
 class UserVehicle(models.Model):
     ''' user vehicle details '''
+    vehicle_id = models.OneToOneField(VehicleDetails, on_delete=models.CASCADE)
     lpn = models.CharField(max_length=12, null=False, blank=False)
+    make = models.CharField(max_length=30, null=False, blank=False)
+    model = models.CharField(max_length=30, null=False, blank=False)
+    color = models.CharField(max_length=30, null=False, blank=False)
+    lpn_class = models.IntegerField(null=False, blank=False)
+    date_added = models.DateTimeField(null=False, blank=False)
+    date_removed = models.DateTimeField(null=True, blank=True)
+    update_date = models.DateTimeField(
+        null=False, blank=False, 
+        auto_now_add=True)
+
+    
 
 
-@receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
-    ''' creates a profile if none, or updates existing one '''
-    if created:
-        UserProfile.objects.create(user=instance)
+# @receiver(post_save, sender=User)
+# def update_user_profile(sender, instance, created, **kwargs):
+#     ''' creates a profile if none, or updates existing one '''
+#     if created:
+#         UserProfile.objects.create(user=instance)
 
-    # saves existing profile
-    instance.UserProfile.save()
+#     # saves existing profile
+#     instance.UserProfile.save()

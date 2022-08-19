@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     # user created apps
     'home',
+    'user_account',
+    'vehicles',
 ]
 
 MIDDLEWARE = [
@@ -119,7 +121,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 5
 LOGIN_URL = 'accounts/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/account/'
 
 WSGI_APPLICATION = 'toll.wsgi.application'
 

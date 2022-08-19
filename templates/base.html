@@ -30,9 +30,15 @@
     <body class="container">
         <header class="container-fluid">
             <div class="row no-gutters">
-                <a href="{% url 'account_login' %}" class="col-md-2 logo vert-align">
-                    <i class="fa-solid fa-user double"></i>
-                </a>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'account_logout' %}" class="col-md-2 logo vert-align">
+                        <i class="fa-solid fa-arrow-right-from-bracket double"></i>
+                    </a>
+                {% else %}
+                    <a href="{% url 'account_login' %}" class="col-md-2 logo vert-align">
+                        <i class="fa-solid fa-user double"></i>
+                    </a>
+                {% endif %}
                 <div class="col-md-8">
                     <a href="{% url 'index' %}" class="logo-font vert-align">
                         <h1 class="title">toll.ie</h1>
@@ -43,23 +49,36 @@
                         <a href="#" class="logo" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-bars double"></i>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="{% url 'account_login' %}" class="dropdown-item">Log In</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'account_signup' %}" class="dropdown-item">Sign Up</a>
-                            </li>
-                            <li>
-                                <a href="#" class="dropdown-item">Pay-a-Toll</a>
-                            </li>
-                            <li>
-                                <a href="#" class="dropdown-item">Pay-a-Penalty</a>
-                            </li>
-                            <li>
-                                <a href="#" class="dropdown-item">Contact us</a>
-                            </li>
-                        </ul>
+                        {% if request.user.is_authenticated %}
+                            <ul class="dropdown-menu">
+                                {% if request.user.is_superuser %}
+                                    <li>
+                                        <a href="#" class="dropdown-item">Admin Protal</a>
+                                    </li>
+                                {% endif %}
+                                <li>
+                                    <a href="{% url 'account_logout' %}" class="dropdown-item">Log Out</a>
+                                </li>
+                            </ul>
+                        {% else %}
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{% url 'account_login' %}" class="dropdown-item">Log In</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'account_signup' %}" class="dropdown-item">Sign Up</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item">Pay-a-Toll</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item">Pay-a-Penalty</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item">Contact us</a>
+                                </li>
+                            </ul>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -82,6 +101,25 @@
                 </div>
             </div>
         </footer>
+
+        <!-- {% if messages %}
+            <div class="message-container">
+                {% for message in messages %}
+                    {% with message.level as level %}
+                        {% if level == 40 %}
+                            <h2>Level 40</h2>
+                        {% elif level == 30 %}
+                            <h2>Level 30</h2>
+                        {% elif level == 25 %}
+                            <h2>Level 25</h2>
+                        {% else %}
+                            <h2>Level ??</h2>
+                        {% endif %}
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        {% endif %} -->
+
         {% block post_load_js %}{% endblock %}
     </body>
 </html>

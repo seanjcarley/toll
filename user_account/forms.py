@@ -1,4 +1,3 @@
-from re import M
 from django import forms
 from .models import UserProfile, UserVehicle
 
@@ -18,7 +17,8 @@ class UserProfileForm(forms.ModelForm):
             'street3': 'Street Address 3',
             'town_city': 'Town or City',
             'county': 'County',
-            'post_code': 'Postcode'
+            'post_code': 'Postcode',
+            'phone': 'phone',
         }
 
         self.fields['street1'].widget.attrs['autofocus'] = True
@@ -27,7 +27,7 @@ class UserProfileForm(forms.ModelForm):
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
                 else:
-                    placeholder = placeholder[field]
+                    placeholder = placeholders[field]
                 self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = ''
             self.fields[field].label = False
@@ -40,7 +40,7 @@ class UserVehicleForm(forms.ModelForm):
             'date_added', 'date_removed', 'update_date')
 
     def __init__(self, *args, **kwargs):
-        ''' add place holders and classes, remove auto-generated labels and
+        ''' add placeholders and classes, remove auto-generated labels and
         set auto-focus '''
         super.__init__(*args, **kwargs)
         placeholders = {
@@ -51,5 +51,3 @@ class UserVehicleForm(forms.ModelForm):
         self.fields['lpn'].widget.attrs['autofocus'] = True
         self.fields['lpn'].widget.attrs['class'] = ''
         self.fields['lpn'].widget.label = False
-
-

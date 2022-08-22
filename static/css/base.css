@@ -3,12 +3,37 @@
 a {
     text-decoration: none;
     color: #fff;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.allauth-form-inner-content {
+    text-align: left;
+    padding: auto;
+    margin: auto;
+}
+
+.allauth-form-inner-content input {
+    /* border-color: #598392; */
+    border-radius: 10;
+}
+
+.allauth-form-inner-content label:not([for='id_remember']) {
+    display: none;
+}
+
+.allauth-form-inner-content p {
+    margin-top: 1.5rem;
 }
 
 body {
     font-family: "Roboto", sans-serif;
-    display: flex;
-    flex-direction: column;
+    height: calc(100%);
+    background-size: cover;
+    height: 100vh;
 }
 
 .capitalise {
@@ -30,14 +55,20 @@ body {
 
 footer {
     color: white;
-    background-color: purple;
-    text-align: center;
+    background-color: #08A84B;
     position: absolute;
+    text-align: center;
+    left: 0;
     bottom: 0;
-    flex: none;
+    width:100%;
+}
+
+.h-100 {
+    height: 88%!important;
 }
 
 header {
+    width:100%;
     text-align: center;
     flex: none;
 }
@@ -50,7 +81,6 @@ html {
 li a {
     display: block;
     text-decoration: none;
-
 }
 
 .logo {
@@ -70,6 +100,10 @@ li a {
 
 .lowercase {
     text-transform: lowercase;
+}
+
+.mobile {
+    display: none;
 }
 
 .nav-item {
@@ -113,11 +147,21 @@ li a {
     text-decoration: none;   
 }
 
+.overlay {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background: rgba(255,255,255,.75);
+    z-index: -8888;
+}
+
 section {
-    color: #fff;
-    background-color: #800080;
-    /*overflow-y: auto;*/
-    flex: auto;
+    color: #800080;
+    /* background-color: #800080; */
+    /* text-align: center; */
+    flex: none;
 }
 
 .section-side {
@@ -161,22 +205,34 @@ section {
 /* @media queries  */
 /* x-small (eg: phone) */
 @media (max-width: 600px) {
+    .desktop {
+        display: none;
+    }
 
+    .mobile {
+        display: block
+    }
 }
 
 /* small (eg: tablet in portrait orientation) */
 @media (min-width: 601px) and (max-width: 767px) {
+    .desktop {
+        display: none;
+    }
 
+    .mobile {
+        display: block
+    }
 }
 
 /* medium (eg: tablet in landscape orientation) */
 @media (min-width: 768px) and (max-width: 991px) {
-
+    
 }
 
 /* large (eg: Laptop/desktop) */
 @media (min-width: 992px) and (max-width: 1199px) {
-
+    
 }
 
 /* x-large (eg: Large Laptop/desktop) */
@@ -186,6 +242,7 @@ section {
 
 /*
 .color-1 {color: #800080;}
+#08A84B
 .color-2 {color: #804000;}
 .color-3 {color: #008000;}
 .color-4 {color: #004080;}

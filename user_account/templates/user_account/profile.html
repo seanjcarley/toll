@@ -1,8 +1,80 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block page_header %}{% endblock %}
+{% block page_header %}
+<div class="row no-gutters">
+    <div class="col">
+        <h2>Welcome {{ fname }}</h2>
+    </div>
+</div>
+<div class="row no-gutters">
+    <div class="col">
+        <ul id="nav" class="navbar">
+            <li class="col-3 nav-item nav-ui-colour-1">
+                <a href="{% url 'account_login' %}" class="">
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span>Personal Info</span>  
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="col-3 nav-item nav-ui-colour-2">
+                <a href="{% url 'account_signup' %}" class="">
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span class="no-dec">Journey Info</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="col-3 nav-item nav-ui-colour-3">
+                <a href="#" class="">
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa-solid fa-cash-register" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span>Payment Info</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="col-3 nav-item nav-ui-colour-4">
+                <a href="#" class="">
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa-solid fa-comments" aria-hidden="true"></i>        
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span>Vehicle Info</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
 
 {% block content %}
-    <h1>You have logged in!</h1>
+    <h3>Personal Info</h3>
+    <form action="{% url 'profile' %}" method="POST">
+        {% csrf_token %}
+        {{ form|crispy}}
+    </form>
 {% endblock %}

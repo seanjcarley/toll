@@ -28,6 +28,7 @@
         <title>toll.ie {% block extra_title %}{% endblock %}</title>
     </head>
     <body class="container">
+        <div class="overlay"></div>
         <header class="container-fluid">
             <div class="row no-gutters">
                 {% if request.user.is_authenticated %}
@@ -91,39 +92,33 @@
             {% block content%}{% endblock %}
         </section>
         <footer>
-            <div class="container">
-            <div class="row no-gutters">
-                <div class="col-md-4">
-                    partner-logo-1 partner-logo-2
-                </div>
-                <div class="col-md-4">
-                    list-of-links-1
-                </div>
-                <div class="col-md-4">
-                    list-of-links-2
-                </div>
-            </div>
-            </div>
+            {% include 'includes/footer.html' %}
         </footer>
 
-        <!-- {% if messages %}
+        {% if messages %}
             <div class="message-container">
                 {% for message in messages %}
                     {% with message.level as level %}
                         {% if level == 40 %}
-                            <h2>Level 40</h2>
+                            {% include 'includes/toasts/toast_error.html' %}
                         {% elif level == 30 %}
-                            <h2>Level 30</h2>
+                            {% include 'includes/toasts/toast_warning.html' %}
                         {% elif level == 25 %}
-                            <h2>Level 25</h2>
+                            {% include 'includes/toasts/toast_success.html' %}
                         {% else %}
-                            <h2>Level ??</h2>
+                            {% include 'includes/toasts/toast_info.html' %}
                         {% endif %}
                     {% endwith %}
                 {% endfor %}
             </div>
-        {% endif %} -->
+        {% endif %}
 
-        {% block post_load_js %}{% endblock %}
+        {% block post_load_js %}
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('.toast').toast('show');
+                });
+            </script>
+        {% endblock %}
     </body>
 </html>

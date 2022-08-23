@@ -10,13 +10,9 @@
 
 <form enctype="multipart/form-data" class="" action="" method="POST" id="">
   {% csrf_token %}
-  <fieldset>
-    <legend class="text-center text-header">User Details</legend>
-    {{ }}
-  </fieldset>
-
+  {{ form|crispy }}
 </form>
 
 
 
-{% endblock %}
+{% endblock %} 

@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import UserProfile
-from .forms import UserProfileForm
+from .forms import UserProfileForm, CreateUserForm
 
 
 # Create your views here.
@@ -47,6 +48,22 @@ def show_user_profile(request):
 
 def create_user_profile(request):
     ''' create a new user '''
-    form = UserProfileForm()
+    # profile = get_object_or_404(UserProfile, user=request.user)
+    if request.method == 'POST':
+        form = CreateUserForm()
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, 'Registration successful!')
+        else:
+            messages.error(request, 'Registration failed!')
+    else:
+        form = CreateUserForm()
 
-    return render(request, form)
+    template = 'user_account/signup.html'
+
+    context = {
+        'form': form
+    }
+
+    return render(request, template, context)

@@ -1,5 +1,7 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from .models import UserProfile, UserVehicle
+from django.contrib.auth.models import User
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
@@ -31,6 +33,40 @@ class UserProfileForm(forms.ModelForm):
                 self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = ''
             self.fields[field].label = False
+
+
+class CreateUserForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
+
+    def __init__(self, *args, **kwargs):
+        ''' add placeholders and classes, remove auto-generated labels and
+        set auto-focus '''
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'username': 'Username',
+            'email': 'Email Address',
+            'password1': 'Enter a Password',
+            'password2': 'Re-Enter Password',
+        }
+        self.fields['username'].widget.attrs['autofocus'] = True
+        for field in self.fields:
+            if self.fields[field].required:
+                placeholder = f'{placeholders[field]} *'
+            else:
+                placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+        self.fields[field].widget.attrs['class']= ''
+        self.fields[field].label = False
+
+    def save(self, commit=True):
+        user = super(CreateUserForm, self).save(commit=False)
+        if commit:
+            user.save()
+        return User
 
 
 class UserVehicleForm(forms.ModelForm):

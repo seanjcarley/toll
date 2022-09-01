@@ -1,0 +1,30 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block inner_content %}
+    <h1>{% trans "Sign Up" %}</h1>
+    <p>{% blocktrans %}Already have an account? Please <a href="{{ login_url }}">login here</a>.{% endblocktrans %}</p>
+    <form enctype="multipart/form-data" action="{% url 'account_signup' %}" class="signup" method="POST">
+        {% csrf_token %}
+        <fieldset>
+            <legend></legend>
+            {{ form.username | as_crispy_field }}
+        </fieldset>
+        <hr>
+        <fieldset>
+            <legend></legend>
+            {{ form.email | as_crispy_field }}
+        </fieldset>
+        <hr>
+        <fieldset>
+            <legend></legend>
+            {{ form.password1 | as_crispy_field}}
+            {{ form.password2 | as_crispy_field}}
+        </fieldset>
+        <hr>
+        <!-- {{ form|crispy }} -->
+        <button class="btn btn-primary" type="submit">Sign Up</button>
+    </form>
+{% endblock %}

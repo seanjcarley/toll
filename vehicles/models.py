@@ -20,6 +20,9 @@ class VehicleOwnerDetails(models.Model):
     post_code = models.CharField(max_length=10, null=True, blank=True)
     country = CountryField(blank_label='Country', null=False, blank=False)
 
+    def __str__(self):
+        return str(self.id)
+
 
 class VehicleDetails(models.Model):
     ''' vehicle details from authority '''

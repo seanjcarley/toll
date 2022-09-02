@@ -5,6 +5,11 @@ from django_countries.fields import CountryField
 # Create your models here.
 class VehicleOwnerDetails(models.Model):
     ''' vehcile owner details from authority '''
+
+    class Meta:
+        verbose_name_plural = 'VehicleOwnerDetails'
+
+    
     f_name = models.CharField(max_length=50, null=True, blank=True)
     s_name = models.CharField(max_length=50, null=True, blank=True)
     address_1 = models.CharField(max_length=75, null=False, blank=False)
@@ -18,6 +23,11 @@ class VehicleOwnerDetails(models.Model):
 
 class VehicleDetails(models.Model):
     ''' vehicle details from authority '''
+
+    class Meta:
+        verbose_name_plural = 'VehicleDetails'
+
+    
     owner = models.ForeignKey(
         VehicleOwnerDetails, null=False, 
         blank=False, on_delete=models.CASCADE)

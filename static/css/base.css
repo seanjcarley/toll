@@ -98,6 +98,10 @@ body {
     display: none;
 }
 
+.controls input {
+    width: 80%;
+}
+
 .custom-toast {
     overflow: visible;
 }
@@ -109,6 +113,7 @@ body {
 footer {
     color: white;
     background-color: #08A84B;
+    flex: none;
     position: absolute;
     text-align: center;
     left: 0;

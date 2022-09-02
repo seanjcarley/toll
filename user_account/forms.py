@@ -33,6 +33,7 @@ class UserProfileForm(forms.ModelForm):
                 self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = ''
             self.fields[field].label = False
+            self.fields[field].widget.attrs.update(style='max-width: 20em')
 
 
 class CreateUserForm(UserCreationForm):

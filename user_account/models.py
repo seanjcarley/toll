@@ -1,5 +1,6 @@
 from distutils.archive_util import make_archive
 from itertools import filterfalse
+from tabnanny import verbose
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -12,6 +13,11 @@ from vehicles.models import VehicleDetails
 # Create your models here.
 class UserProfile(models.Model):
     ''' user profile for contact details '''
+
+    class Meta:
+        verbose_name_plural = 'UserProfile'
+    
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     account_no = models.IntegerField(null=False, blank=False)
     street1 = models.CharField(max_length=75, null=False, blank=False)
@@ -34,6 +40,11 @@ class UserProfile(models.Model):
 
 class UserVehicle(models.Model):
     ''' user vehicle details '''
+
+    class Meta:
+        verbose_name_plural = 'UserVehicle'
+
+    
     vehicle_id = models.OneToOneField(VehicleDetails, on_delete=models.CASCADE)
     lpn = models.CharField(max_length=12, null=False, blank=False)
     make = models.CharField(max_length=30, null=False, blank=False)

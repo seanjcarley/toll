@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UserProfile
+from .models import UserProfile, UserVehicle
 
 # Register your models here.
 class UserProfileAdmin(admin.ModelAdmin):
@@ -12,4 +12,14 @@ class UserProfileAdmin(admin.ModelAdmin):
     ordering = ('id',)
 
 
+class UserVehicleAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'vehicle_id', 'lpn', 'make', 'model', 'color', 'lpn_class', 
+        'date_added', 'date_removed', 'update_date',
+    )
+
+    ordering = ('id',)
+
+
 admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(UserVehicle, UserVehicleAdmin)

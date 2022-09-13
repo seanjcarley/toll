@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import UserProfile
-from .forms import UserProfileForm, CreateUserForm
+from .forms import UserProfileForm, CreateUserForm, UserVehicleForm
 
 
 # Create your views here.
@@ -58,12 +58,14 @@ def create_user_profile(request):
         else:
             messages.error(request, 'Registration failed!')
     else:
-        form = CreateUserForm()
+        form1 = CreateUserForm()
+        form2 = UserVehicleForm
 
     template = 'user_account/signup.html'
 
     context = {
-        'form': form
+        'form1': form1,
+        'form2': form2
     }
 
     return render(request, template, context)

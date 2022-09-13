@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_header %}
+<div class="row no-gutters">
+    <hr>
+    <div class="col">
+        <h2 class="center">Welcome {{ fname }}</h2>
+    </div>
+    <hr>
+</div>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h3 class="center">Vehicle Details</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <hr>
+        <div class="col-md-6">
+            <h4 class="center">Active Vehicles</h4>
+        </div>
+        <div class="col-md-6">
+            <h4 class="center"> Add a Vehicle</h4>
+        </div>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                {{ for v in vehicles}}
+                    <div class="col-md-2 offset-1">
+                        {{ v.lpn }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ v.make }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ v.model }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ v.class }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ v.date_added }}
+                    </div>
+                {{ endfor}}
+            </div>
+            <div class="col-md-6">
+                <form enctype="multipart/form-data" action="" method="POST" id="vehicle-form">
+                    
+                </form>
+                {% csrf_token %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

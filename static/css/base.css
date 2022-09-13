@@ -10,6 +10,28 @@ a:hover {
     text-decoration: #FF883E;
 }
 
+.accordion {
+    background-color: #800080;
+    color: #fff;
+    padding: auto;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.5s;
+}
+
+.active .accordion:hover {
+    background-color: #cc00cc;
+}
+
+.panel {
+    padding: auto;
+    background-color: #fff;
+    display: none;
+    overflow: hidden;
+}
+
 .allauth-form-inner-content {
     text-align: left;
     padding: auto;

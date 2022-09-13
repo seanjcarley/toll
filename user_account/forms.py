@@ -79,7 +79,7 @@ class UserVehicleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         ''' add placeholders and classes, remove auto-generated labels and
         set auto-focus '''
-        super.__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         placeholders = {
             'lpn': 'Vehicle Licence Plate Number'
         }

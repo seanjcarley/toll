@@ -19,5 +19,3 @@ Once signed in, users will be able to view and edit their personal details, view
 
 ### Payment Page (not Signed In)
 This page will allow infrequent users pay for past or future charges. There will also be an option to pay for any penalties received
-
-

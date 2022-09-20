@@ -19,17 +19,13 @@ a:hover {
     border: none;
     outline: none;
     transition: 0.5s;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
 }
 
-.active .accordion:hover {
+.accordion:hover {
     background-color: #cc00cc;
-}
-
-.panel {
-    padding: auto;
-    background-color: #fff;
-    display: none;
-    overflow: hidden;
+    color: #c0c0c0;
 }
 
 .allauth-form-inner-content {
@@ -102,6 +98,27 @@ body {
     
 }
 
+.btn-check-lpn {
+    background-color: #990099;
+    color: #fff;
+    border-style: none;
+    margin-bottom: 0.5em;
+}
+
+.btn-check-lpn:hover {
+    background-color: #cc00cc;
+    color: #c0c0c0;
+    border-style: none;
+    margin-bottom: 0.5em;
+}
+
+.btn-sign-up {
+    background-color: #990099;
+    color: #fff;
+    border-style: none;
+    margin: 0.3em 0em;
+}
+
 .capitalise {
     text-transform: capitalize;
 }
@@ -113,6 +130,11 @@ body {
 .container-fluid {
     margin: 0;
     padding: 0;
+}
+
+.controls {
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
 }
 
 .controls p,
@@ -127,6 +149,23 @@ body {
 .custom-toast {
     overflow: visible;
 }
+
+#div_id_password1 .controls,
+#div_id_street1 .controls
+ {
+    padding-bottom: 0.2em;
+}
+
+#div_id_password2 .controls,
+#div_id_street3 .controls {
+    padding-top: 0.2em;
+}
+
+#div_id_street2 .controls {
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
 
 .double {
     scale: 200%;
@@ -151,6 +190,11 @@ header {
     width:100%;
     text-align: center;
     flex: none;
+    margin: 1em 0em;
+}
+
+hr {
+    margin: 0.2em;
 }
 
 html {
@@ -158,9 +202,21 @@ html {
     width: 100%;
 }
 
+#id_country {
+    width: auto;
+}
+
+input {
+    margin: 0.1em;
+}
+
 li a {
     display: block;
     text-decoration: none;
+}
+
+#login_details {
+    display: block;
 }
 
 .logo {
@@ -244,11 +300,21 @@ li a {
     z-index: -8888;
 }
 
+.panel {
+    padding: auto;
+    background-color: #fff;
+    /* display: none; */
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+}
+
 section {
     color: #800080;
     /* background-color: #800080; */
     /* text-align: center; */
     flex: none;
+
 }
 
 .section-side {

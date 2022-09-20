@@ -28,7 +28,7 @@ class UserProfile(models.Model):
     post_code = models.CharField(max_length=10, null=True, blank=True)
     country = CountryField(blank_label='Country', null=False, blank=True, default='Ireland')
     phone = models.CharField(max_length=20, null=True, blank=True)
-    date_added = models.DateTimeField(null=False, blank=False)
+    date_added = models.DateTimeField(null=False, blank=False, auto_now_add=True)
     date_removed = models.DateTimeField(null=True, blank=True)
     update_date = models.DateTimeField(
         null=False, blank=False, 

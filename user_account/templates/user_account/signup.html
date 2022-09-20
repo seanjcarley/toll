@@ -6,16 +6,17 @@
 {% block inner_content %}
     <div class="row">
         <div class="col-md-10 offset-1">
-            <h1>{% trans "Sign Up" %}</h1>
+            <h2>{% trans "Sign Up" %}</h2>
             <p>{% blocktrans %}Already have an account? Please <a href="{{ login_url }}">login here</a>.{% endblocktrans %}</p>
+            <p>To create an account, please fill in your details below.</p>
         </div>
     </div>
     <div class="row">
         <div class="col-md-10 offset-1">
-            <button class="accordion">Log In Details</button>
-            <div class="panel">
-                <form enctype="multipart/form-data" action="{% url 'account_signup' %}" class="signup" method="POST">
-                    {% csrf_token %}
+            <form enctype="multipart/form-data" class="signup center" method="POST">
+                {% csrf_token %}
+                <button class="accordion" id="login">Log In Details</button>
+                <div class="panel">
                     <fieldset>
                         <legend></legend>
                         {{ form1.username | as_crispy_field }}
@@ -31,24 +32,58 @@
                         {{ form1.password1 | as_crispy_field}}
                         {{ form1.password2 | as_crispy_field}}
                     </fieldset>
-                    <hr>
-                    <!-- {{ form|crispy }} -->
-                    <!-- <button class="btn btn-primary" type="submit">Sign Up</button> -->
-                </form>
-            </div>
-            <button class="accordion">Vehicle Details</button>
-            <div class="panel">
-                <form enctype="multipart/form-data" action="{% url 'account_signup' %}" class="signup" method="POST">
+                </div>
+                <button class="accordion" id="vehicle">Vehicle Details</button>
+                <div class="panel">
+                    <p class="vehicle-details">
+                        Please enter your vehicle registration number and click 
+                        the "Check Vehicle Details" button to confirm. 
+                        <b>Please Note:</b> only vehicles registered in the Republic of 
+                        Ireland can be registered on TOLL.ie.
+                    </p>
                     <fieldset>
                         {{ form2.lpn | as_crispy_field }}
+                        <button class="btn-check-lpn" type="submit">Check Vehicle Details</button>
+                    </fieldset>
+                </div>
+                <button class="accordion">Contact Details</button>
+                <div class="panel">
+                    <fieldset>
+                        {{ form3.street1 | as_crispy_field }}
+                        {{ form3.street2 | as_crispy_field }}
+                        {{ form3.street3 | as_crispy_field }}
                     </fieldset>
                     <hr>
-                </form>
-            </div>
-            <button class="accordion">Contact Details</button>
-            <div class="panel"></div>
-            <button class="accordion">Payment Details</button>
-            <div class="panel"></div>
+                    <fieldset>
+                        {{ form3.town_city | as_crispy_field }}
+                    </fieldset>
+                    <hr>
+                    <fieldset>
+                        {{ form3.county | as_crispy_field }}
+                    </fieldset>
+                    <hr>
+                    <fieldset>
+                        {{ form3.post_code | as_crispy_field }}
+                    </fieldset>
+                    <hr>
+                    <fieldset>
+                        {{ form3.country | as_crispy_field }}
+                    </fieldset>
+                    <hr>
+                    <fieldset>
+                        {{ form3.phone | as_crispy_field }}
+                    </fieldset>
+                </div>
+                <div class="row">
+                <hr>
+                <div class="col-md-12 center">
+                    <p>By clicking the sign up button below you agree to the 
+                        TOLL.ie <a href="#">Terms and Conditions</a>
+                    </p>
+                    <button class="btn btn-sign-up center" action="{% url 'account_signup' %}" type="submit" method="POST">Sign Up</button>
+                </div>
+                <hr>
+            </form>
         </div>
     </div>
 {% endblock %}

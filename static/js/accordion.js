@@ -8,10 +8,10 @@ for (i = 0; i < acc.length; i++) {
 
         /* toggle panel */
         var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
         } else {
-            panel.style.display = "block";
+            panel.style.maxHeight = panel.scrollHeight + "px";
         }
     });
 }

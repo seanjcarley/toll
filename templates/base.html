@@ -90,12 +90,7 @@
         <section class="h-100">
             {% block page_header %}{% endblock %}
             {% block content%}{% endblock %}
-        </section>
-        <!-- <footer>
-            {% include 'includes/footer.html' %}
-        </footer> -->
-
-        {% if messages %}
+            {% if messages %}
             <div class="message-container">
                 {% for message in messages %}
                     {% with message.level as level %}
@@ -112,6 +107,10 @@
                 {% endfor %}
             </div>
         {% endif %}
+        </section>
+        <!-- <footer>
+            {% include 'includes/footer.html' %}
+        </footer> -->
 
         {% block post_load_js %}
             <script type="text/javascript">

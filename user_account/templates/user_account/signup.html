@@ -43,11 +43,20 @@
                     </p>
                     <fieldset>
                         {{ form2.lpn | as_crispy_field }}
+                        {{ form2.make | as_crispy_field }}
+                        {{ form2.model | as_crispy_field }}
+                        {{ form2.color | as_crispy_field }}
+                        {{ form2.lpn_class | as_crispy_field }}
                         <button class="btn-check-lpn" type="submit">Check Vehicle Details</button>
                     </fieldset>
                 </div>
                 <button class="accordion">Contact Details</button>
                 <div class="panel">
+                    <fieldset>
+                        {{ form1.first_name | as_crispy_field }}
+                        {{ form1.last_name | as_crispy_field }}
+                    </fieldset>
+                    <hr>
                     <fieldset>
                         {{ form3.street1 | as_crispy_field }}
                         {{ form3.street2 | as_crispy_field }}

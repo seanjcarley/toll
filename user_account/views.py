@@ -1,3 +1,4 @@
+from audioop import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -54,7 +55,13 @@ def create_user_profile(request):
         if check_user_name(request.POST['username']):
             pass
 
-        form2_data = {'lpn': request.POST['lpn'],}
+        form2_data = {
+            'lpn': request.POST['lpn'],
+            'make': request.POST['make'],
+            'model': request.POST['model'],
+            'color': request.POST['color'],
+            'lpn_class': request.POST['lpn_class'],
+        }
         account_no = create_acc_no()
         form3_data = {
             'street1': request.POST['street1'],
@@ -71,19 +78,21 @@ def create_user_profile(request):
         form2 = UserVehicleForm(form2_data)
         form3 = UserProfileForm(form3_data)
 
-        # if form1.is_valid() and form2.is_valid() and form3.is_valid():
-        if form1.is_valid() and form3.is_valid():
+        if form1.is_valid() and form2.is_valid() and form3.is_valid():
+        # if form1.is_valid() and form3.is_valid():
             print("all forms are valid")
             form1.save(commit=False)
+            vehicle = form2.save(commit=False)
             contact = form3.save(commit=False)
             contact.account_no = account_no
             form1.save()
-            print(User.objects.get(username = request.POST['username']))
             contact.user = User.objects.get(username = request.POST['username'])
             contact.save()
+            vehicle.account = UserProfile.get(user = contact.user)
+            vehicle.save()
             login(request, contact.user)
             messages.success(request, 'Registration successful!')
-            # return redirect()
+            return redirect('show_user_profile')
         else:
             messages.error(request, 'Registration failed!')
     else:

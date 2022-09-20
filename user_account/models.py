@@ -44,18 +44,19 @@ class UserVehicle(models.Model):
     class Meta:
         verbose_name_plural = 'UserVehicle'
 
-    
+    account = models.ForeignKey(UserProfile, null=False, 
+                                    blank=False, on_delete=models.CASCADE, default=1)
     vehicle_id = models.OneToOneField(VehicleDetails, on_delete=models.CASCADE)
     lpn = models.CharField(max_length=12, null=False, blank=False)
     make = models.CharField(max_length=30, null=False, blank=False)
     model = models.CharField(max_length=30, null=False, blank=False)
     color = models.CharField(max_length=30, null=False, blank=False)
     lpn_class = models.IntegerField(null=False, blank=False)
-    date_added = models.DateTimeField(null=False, blank=False)
+    date_added = models.DateTimeField(null=False, blank=False,
+                                        auto_now_add=True)
     date_removed = models.DateTimeField(null=True, blank=True)
-    update_date = models.DateTimeField(
-        null=False, blank=False, 
-        auto_now_add=True)
+    update_date = models.DateTimeField(null=False, blank=False, 
+                                        auto_now_add=True)
 
     
 

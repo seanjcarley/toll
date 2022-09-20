@@ -151,12 +151,14 @@ body {
 }
 
 #div_id_password1 .controls,
+#div_id_first_name .controls,
 #div_id_street1 .controls
  {
     padding-bottom: 0.2em;
 }
 
 #div_id_password2 .controls,
+#div_id_last_name .controls,
 #div_id_street3 .controls {
     padding-top: 0.2em;
 }

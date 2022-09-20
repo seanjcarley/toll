@@ -25,6 +25,7 @@ class UserProfileForm(forms.ModelForm):
 
         self.fields['street1'].widget.attrs['autofocus'] = True
         for field in self.fields:
+            self.fields[field].widget.attrs.update(style='max-width: 20em')
             if field != 'country':
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
@@ -33,7 +34,6 @@ class UserProfileForm(forms.ModelForm):
                 self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = ''
             self.fields[field].label = False
-            self.fields[field].widget.attrs.update(style='max-width: 20em')
 
 
 class CreateUserForm(UserCreationForm):
@@ -41,7 +41,8 @@ class CreateUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'email', 
+                    'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
         ''' add placeholders and classes, remove auto-generated labels and
@@ -49,12 +50,15 @@ class CreateUserForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         placeholders = {
             'username': 'Username',
+            'first_name': 'First Name',
+            'last_name': 'Last Name',
             'email': 'Email Address',
             'password1': 'Enter a Password',
             'password2': 'Re-Enter Password',
         }
-        self.fields['username'].widget.attrs['autofocus'] = True
+        # self.fields['username'].widget.attrs['autofocus'] = True
         for field in self.fields:
+            self.fields[field].widget.attrs.update(style='max-width: 20em')
             if self.fields[field].required:
                 placeholder = f'{placeholders[field]} *'
             else:
@@ -73,18 +77,26 @@ class CreateUserForm(UserCreationForm):
 class UserVehicleForm(forms.ModelForm):
     class Meta:
         model = UserVehicle
-        exclude = ('vehicle_id', 'make', 'model', 'color', 'lpn_class',
-            'date_added', 'date_removed', 'update_date')
+        exclude = ('account','vehicle_id', 'date_added', 'date_removed', 
+                    'update_date')
 
     def __init__(self, *args, **kwargs):
         ''' add placeholders and classes, remove auto-generated labels and
         set auto-focus '''
         super().__init__(*args, **kwargs)
         placeholders = {
-            'lpn': 'Vehicle Licence Plate Number'
+            'lpn': 'Vehicle Licence Plate Number',
+            'make': '', 
+            'model': '', 
+            'color': '', 
+            'lpn_class': '',
         }
         placeholder = f'{placeholders["lpn"]} *'
-        self.fields['lpn'].widget.attrs['placeholder'] = placeholder
-        self.fields['lpn'].widget.attrs['autofocus'] = True
-        self.fields['lpn'].widget.attrs['class'] = ''
-        self.fields['lpn'].widget.label = False
+        for field in self.fields:
+            self.fields[field].widget.attrs.update(style='max-width: 20em')
+            if field != 'lpn':
+                self.fields[field].widget = forms.HiddenInput()
+            if field == 'lpn':
+                self.fields[field].widget.attrs['placeholder'] = placeholder
+        self.fields[field].widget.attrs['class']= ''
+        self.fields[field].label = False        

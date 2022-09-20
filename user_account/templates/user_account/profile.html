@@ -138,7 +138,11 @@
                     </div>
                 </div>
                 <hr>
-                <button class="">Change Password</button>
+                <div class="row">
+                    <div class="vert-align col-md-4 offset-4">
+                        <button class="" type="submit" action="{% url 'account_reset_password' %}">Change Password</button>
+                    </div>
+                </div>
             </div>
             <div class="col-md-6">
                 <form enctype="multipart/form-data" action="{% url 'profile' %}" method="POST" id="address-form">

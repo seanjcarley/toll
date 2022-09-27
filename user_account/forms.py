@@ -77,7 +77,7 @@ class CreateUserForm(UserCreationForm):
 class UserVehicleForm(forms.ModelForm):
     class Meta:
         model = UserVehicle
-        exclude = ('account','vehicle_id', 'date_added', 'date_removed', 
+        exclude = ('make', 'model', 'color', 'lpn_class', 'account','vehicle_id', 'date_added', 'date_removed', 
                     'update_date')
 
     def __init__(self, *args, **kwargs):
@@ -86,17 +86,10 @@ class UserVehicleForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         placeholders = {
             'lpn': 'Vehicle Licence Plate Number',
-            'make': '', 
-            'model': '', 
-            'color': '', 
-            'lpn_class': '',
         }
         placeholder = f'{placeholders["lpn"]} *'
         for field in self.fields:
             self.fields[field].widget.attrs.update(style='max-width: 20em')
-            if field != 'lpn':
-                self.fields[field].widget = forms.HiddenInput()
-            if field == 'lpn':
-                self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].widget.attrs['placeholder'] = placeholder
         self.fields[field].widget.attrs['class']= ''
         self.fields[field].label = False        

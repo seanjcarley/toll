@@ -1,4 +1,5 @@
 {% extends "account/base.html" %}
+{% load static %}
 
 {% load i18n %}
 {% block head_title %}{% trans "Signup" %}{% endblock %}
@@ -13,6 +14,8 @@
     </div>
     <div class="row">
         <div class="col-md-10 offset-1">
+            <!-- {{ form2.lpn | as_crispy_field}}
+            <button class="btn btn-check-lpn" id="lpn_check" method="GET" type="submit">Check Vehicle Information</button> -->
             <form enctype="multipart/form-data" class="signup center" method="POST">
                 {% csrf_token %}
                 <button class="accordion" id="login">Log In Details</button>
@@ -42,12 +45,8 @@
                         Ireland can be registered on TOLL.ie.
                     </p>
                     <fieldset>
-                        {{ form2.lpn | as_crispy_field }}
-                        {{ form2.make | as_crispy_field }}
-                        {{ form2.model | as_crispy_field }}
-                        {{ form2.color | as_crispy_field }}
-                        {{ form2.lpn_class | as_crispy_field }}
-                        <button class="btn-check-lpn" type="submit">Check Vehicle Details</button>
+                        {{ form2.lpn | as_crispy_field}}
+                        <button class="btn btn-check-lpn" id="lpn_check">Check Vehicle Information</button>
                     </fieldset>
                 </div>
                 <button class="accordion">Contact Details</button>
@@ -95,4 +94,11 @@
             </form>
         </div>
     </div>
+{% endblock %}
+
+{% block post_load_js %}
+    {{ block.super }}
+    <script src="{% static 'js/accordion.js' %}"></script>
+    <script src="{% static 'js/check_uname.js' %}"></script>
+    <script src="{% static 'js/check_lpn.js' %}"></script>
 {% endblock %}

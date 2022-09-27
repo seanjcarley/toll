@@ -1,11 +1,15 @@
-from audioop import reverse
+import json
+from urllib import request
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.core import serializers
+from django.http import JsonResponse
 from .models import UserProfile
 from .forms import UserProfileForm, CreateUserForm, UserVehicleForm
+from vehicles.models import VehicleDetails
 from django.db.models import Q, Max
 
 
@@ -50,55 +54,59 @@ def show_user_profile(request):
 
 def create_user_profile(request):
     ''' create a new user '''
-    # profile = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'POST':
-        if check_user_name(request.POST['username']):
-            pass
+        try:
+            vehicle = VehicleDetails.objects.get(lpn=request)
+            form2_data = {
+                'lpn': request.POST['lpn'],
+                'make': vehicle.make,
+                'model': vehicle.model,
+                'color': vehicle.color,
+                'class': vehicle.lpn_class,
+            }
+            # print(form2_data)
+            account_no = create_acc_no()
+            form3_data = {
+                'street1': request.POST['street1'],
+                'street2': request.POST['street2'],
+                'street3': request.POST['street3'],
+                'town_city': request.POST['town_city'],
+                'county': request.POST['county'],
+                'post_code':request.POST['post_code'],
+                'country': request.POST['country'],
+                'phone': request.POST['phone'],
+            }
 
-        form2_data = {
-            'lpn': request.POST['lpn'],
-            'make': request.POST['make'],
-            'model': request.POST['model'],
-            'color': request.POST['color'],
-            'lpn_class': request.POST['lpn_class'],
-        }
-        account_no = create_acc_no()
-        form3_data = {
-            'street1': request.POST['street1'],
-            'street2': request.POST['street2'],
-            'street3': request.POST['street3'],
-            'town_city': request.POST['town_city'],
-            'county': request.POST['county'],
-            'post_code':request.POST['post_code'],
-            'country': request.POST['country'],
-            'phone': request.POST['phone'],
-        }
+            form1 = CreateUserForm(request.POST)
+            form2 = UserVehicleForm(form2_data)
+            form3 = UserProfileForm(form3_data)
 
-        form1 = CreateUserForm(request.POST)
-        form2 = UserVehicleForm(form2_data)
-        form3 = UserProfileForm(form3_data)
 
-        if form1.is_valid() and form2.is_valid() and form3.is_valid():
-        # if form1.is_valid() and form3.is_valid():
-            print("all forms are valid")
-            form1.save(commit=False)
-            vehicle = form2.save(commit=False)
-            contact = form3.save(commit=False)
-            contact.account_no = account_no
-            form1.save()
-            contact.user = User.objects.get(username = request.POST['username'])
-            contact.save()
-            vehicle.account = UserProfile.get(user = contact.user)
-            vehicle.save()
-            login(request, contact.user)
-            messages.success(request, 'Registration successful!')
-            return redirect('show_user_profile')
-        else:
-            messages.error(request, 'Registration failed!')
+            if form1.is_valid() and form2.is_valid() and form3.is_valid():
+                form1.save(commit=False)
+                vehicle = form2.save(commit=False)
+                contact = form3.save(commit=False)
+                contact.account_no = account_no
+                form1.save()
+                contact.user = User.objects.get(username = request.POST['username'])
+                contact.save()
+                vehicle.account = UserProfile.get(user = contact.user)
+                vehicle.save()
+                login(request, contact.user)
+                messages.success(request, 'Registration successful!')
+                return redirect('show_user_profile')
+            else:
+                messages.error(request, 'Registration failed!')
+        except VehicleDetails.DoesNotExist:
+            messages.error(request, 'The vehicle {} does not exist in the vehicle database!'.format(request.POST['lpn']))
+            form1 = CreateUserForm(request.POST)
+            form2 = UserVehicleForm()
+            form3 = UserProfileForm(request.POST)
     else:
         form1 = CreateUserForm()
         form2 = UserVehicleForm()
         form3 = UserProfileForm()
+
 
     template = 'user_account/signup.html'
 
@@ -111,12 +119,54 @@ def create_user_profile(request):
     return render(request, template, context)
 
 
+def get_vehicle_info(request):
+    print(request)
+    try:
+        if is_ajax(request=request) and request.method == 'GET':
+            vrn = request.GET.get('lpn', None)
+            print(vrn)
+            vquery = Q(lpn=vrn)
+            vehicle = VehicleDetails.objects.get(vquery)
+            print(vehicle)
+            formv_data = {
+                    'lpn': request.GET['lpn'],
+                    'make': vehicle.make,
+                    'model': vehicle.model,
+                    'color': vehicle.color,
+                    'class': vehicle.lpn_class,
+                }
+
+            formv = UserVehicleForm(formv_data)
+
+            if formv.is_valid():
+                instance = formv
+                ser_instance = serializers.serialize('json', [instance,])
+                return JsonResponse({"instance": ser_instance}, status=200)
+            else:
+                return JsonResponse({"error": formv.errors}, status=400)
+        return JsonResponse({"error": ""}, status=400)
+    except VehicleDetails.DoesNotExist:
+        messages.error(
+            request, 'The vehicle {} does not exist in the vehicle database!'.format(request.GET.get('lpn')))
+
+
 def create_acc_no():
     num = User.objects.aggregate(Max('id'))
     return num['id__max'] + 10
 
 
-def check_user_name(uname):
-    query = Q(user_id__username = uname)
-    if query:
-        return False
+def check_user_name(request):
+    if is_ajax(request=request) and request.method == 'GET':
+        uname = request.GET.get('username', None)
+        print(uname)
+        if User.objects.filter(username = uname).exists():
+            print(1)
+            return JsonResponse({"valid": False}, status=200)
+        else:
+            print(2)
+            return JsonResponse({"valid": True}, status=200)
+    print(3)
+    return JsonResponse({}, status = 400)
+
+def is_ajax(request):
+    return request.META.get("HTTP_X_REQUESTED_WITH") == 'XMLHttpRequest'

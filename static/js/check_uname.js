@@ -14,7 +14,8 @@ function checkUname(e) {
                 if (!response["valid"]) {
                     alert("This Username is not Valid. Please try a new one.")
                     var uName = $("#id_username");
-                    uName.val("")
+                    uName.val("");
+                    uName.focus();
                 }
             },
             error: function (response) {

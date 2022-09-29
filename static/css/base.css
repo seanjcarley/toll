@@ -306,7 +306,7 @@ li a {
     padding: auto;
     background-color: #fff;
     /* display: none; */
-    overflow: hidden;
+    overflow: auto;
     max-height: 0;
     transition: max-height 0.2s ease-out;
 }

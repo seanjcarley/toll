@@ -64,7 +64,6 @@ def create_user_profile(request):
                 'color': vehicle.color,
                 'class': vehicle.lpn_class,
             }
-            # print(form2_data)
             account_no = create_acc_no()
             form3_data = {
                 'street1': request.POST['street1'],
@@ -120,28 +119,23 @@ def create_user_profile(request):
 
 
 def get_vehicle_info(request):
-    print(request)
     try:
         if is_ajax(request=request) and request.method == 'GET':
             vrn = request.GET.get('lpn', None)
-            print(vrn)
             vquery = Q(lpn=vrn)
             vehicle = VehicleDetails.objects.get(vquery)
-            print(vehicle)
             formv_data = {
-                    'lpn': request.GET['lpn'],
-                    'make': vehicle.make,
-                    'model': vehicle.model,
-                    'color': vehicle.color,
-                    'class': vehicle.lpn_class,
+                    "lpn": request.GET['lpn'],
+                    "make":  vehicle.make,
+                    "model": vehicle.model,
+                    "color": vehicle.color,
+                    "class": vehicle.lpn_class,
                 }
-
             formv = UserVehicleForm(formv_data)
 
             if formv.is_valid():
-                instance = formv
-                ser_instance = serializers.serialize('json', [instance,])
-                return JsonResponse({"instance": ser_instance}, status=200)
+                instance = json.dumps(formv_data)
+                return JsonResponse({"instance": instance}, status=200)
             else:
                 return JsonResponse({"error": formv.errors}, status=400)
         return JsonResponse({"error": ""}, status=400)

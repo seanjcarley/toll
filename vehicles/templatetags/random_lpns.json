@@ -1,0 +1,602 @@
+{
+    "131MO5131": {
+        "make": "Opel",
+        "model": "MDL04",
+        "color": "Blue",
+        "class": 2
+    },
+    "131G25196": {
+        "make": "Honda",
+        "model": "MDL01",
+        "color": "Green",
+        "class": 1
+    },
+    "131CW77674": {
+        "make": "Land Rover",
+        "model": "MDL04",
+        "color": "Red",
+        "class": 3
+    },
+    "131LH10309": {
+        "make": "Ford",
+        "model": "MDL04",
+        "color": "Green",
+        "class": 6
+    },
+    "131WW72575": {
+        "make": "Kia",
+        "model": "MDL01",
+        "color": "White",
+        "class": 6
+    },
+    "132CW47562": {
+        "make": "Mazda",
+        "model": "MDL04",
+        "color": "Red",
+        "class": 5
+    },
+    "132CW30939": {
+        "make": "Ford",
+        "model": "MDL02",
+        "color": "Grey",
+        "class": 7
+    },
+    "132D39727": {
+        "make": "Mercedes",
+        "model": "MDL01",
+        "color": "Black",
+        "class": 5
+    },
+    "132KE70105": {
+        "make": "Honda",
+        "model": "MDL04",
+        "color": "Multi",
+        "class": 2
+    },
+    "132G56616": {
+        "make": "Land Rover",
+        "model": "MDL05",
+        "color": "Blue",
+        "class": 6
+    },
+    "141LS50782": {
+        "make": "Mazda",
+        "model": "MDL01",
+        "color": "Black",
+        "class": 7
+    },
+    "141CN97723": {
+        "make": "Land Rover",
+        "model": "MDL05",
+        "color": "White",
+        "class": 7
+    },
+    "141SO81451": {
+        "make": "Mercedes",
+        "model": "MDL02",
+        "color": "Red",
+        "class": 6
+    },
+    "141RN23448": {
+        "make": "Mercedes",
+        "model": "MDL01",
+        "color": "Blue",
+        "class": 6
+    },
+    "141WX3059": {
+        "make": "Volkswagen",
+        "model": "MDL03",
+        "color": "Red",
+        "class": 3
+    },
+    "142WX88322": {
+        "make": "Ford",
+        "model": "MDL01",
+        "color": "Green",
+        "class": 2
+    },
+    "142LS33962": {
+        "make": "Audi",
+        "model": "MDL02",
+        "color": "Yellow",
+        "class": 7
+    },
+    "142C82708": {
+        "make": "Kia",
+        "model": "MDL05",
+        "color": "Grey",
+        "class": 3
+    },
+    "142G8475": {
+        "make": "Mazda",
+        "model": "MDL02",
+        "color": "Black",
+        "class": 3
+    },
+    "142KY76973": {
+        "make": "Citroen",
+        "model": "MDL02",
+        "color": "Yellow",
+        "class": 4
+    },
+    "151LS59346": {
+        "make": "Volkswagen",
+        "model": "MDL01",
+        "color": "Red",
+        "class": 4
+    },
+    "151LH24109": {
+        "make": "Honda",
+        "model": "MDL04",
+        "color": "Multi",
+        "class": 1
+    },
+    "151SO87858": {
+        "make": "Hyundai",
+        "model": "MDL04",
+        "color": "Blue",
+        "class": 4
+    },
+    "151MN1406": {
+        "make": "Fiat",
+        "model": "MDL04",
+        "color": "Green",
+        "class": 3
+    },
+    "151WW47680": {
+        "make": "Citroen",
+        "model": "MDL05",
+        "color": "Grey",
+        "class": 5
+    },
+    "152RN43390": {
+        "make": "Volkswagen",
+        "model": "MDL02",
+        "color": "Black",
+        "class": 2
+    },
+    "152MN10711": {
+        "make": "Honda",
+        "model": "MDL05",
+        "color": "Yellow",
+        "class": 1
+    },
+    "152OY19151": {
+        "make": "Kia",
+        "model": "MDL04",
+        "color": "Grey",
+        "class": 1
+    },
+    "152LH10304": {
+        "make": "Mercedes",
+        "model": "MDL04",
+        "color": "Blue",
+        "class": 4
+    },
+    "152LH59977": {
+        "make": "Land Rover",
+        "model": "MDL02",
+        "color": "Blue",
+        "class": 4
+    },
+    "161LS32997": {
+        "make": "Fiat",
+        "model": "MDL02",
+        "color": "Green",
+        "class": 7
+    },
+    "161CN2647": {
+        "make": "Hyundai",
+        "model": "MDL03",
+        "color": "Black",
+        "class": 4
+    },
+    "161MH70116": {
+        "make": "Mercedes",
+        "model": "MDL05",
+        "color": "Black",
+        "class": 7
+    },
+    "161W65709": {
+        "make": "Opel",
+        "model": "MDL02",
+        "color": "White",
+        "class": 2
+    },
+    "161W10611": {
+        "make": "Nissan",
+        "model": "MDL02",
+        "color": "Black",
+        "class": 5
+    },
+    "162LD30843": {
+        "make": "Land Rover",
+        "model": "MDL01",
+        "color": "Yellow",
+        "class": 1
+    },
+    "162MN22597": {
+        "make": "Mazda",
+        "model": "MDL02",
+        "color": "Black",
+        "class": 6
+    },
+    "162MH39415": {
+        "make": "Opel",
+        "model": "MDL01",
+        "color": "Grey",
+        "class": 1
+    },
+    "162KY23499": {
+        "make": "Volkswagen",
+        "model": "MDL04",
+        "color": "Yellow",
+        "class": 4
+    },
+    "162G92245": {
+        "make": "Ford",
+        "model": "MDL03",
+        "color": "Multi",
+        "class": 5
+    },
+    "171W40458": {
+        "make": "Nissan",
+        "model": "MDL01",
+        "color": "Red",
+        "class": 5
+    },
+    "171LM92767": {
+        "make": "Hyundai",
+        "model": "MDL01",
+        "color": "White",
+        "class": 2
+    },
+    "171SO9617": {
+        "make": "Hyundai",
+        "model": "MDL05",
+        "color": "Yellow",
+        "class": 7
+    },
+    "171LM6879": {
+        "make": "Mercedes",
+        "model": "MDL02",
+        "color": "Red",
+        "class": 4
+    },
+    "171LS78068": {
+        "make": "Opel",
+        "model": "MDL05",
+        "color": "Green",
+        "class": 6
+    },
+    "172LM72270": {
+        "make": "Fiat",
+        "model": "MDL01",
+        "color": "Grey",
+        "class": 7
+    },
+    "172C53398": {
+        "make": "Seat",
+        "model": "MDL03",
+        "color": "Blue",
+        "class": 6
+    },
+    "172D68465": {
+        "make": "Kia",
+        "model": "MDL05",
+        "color": "White",
+        "class": 1
+    },
+    "172KE86211": {
+        "make": "Seat",
+        "model": "MDL04",
+        "color": "Grey",
+        "class": 2
+    },
+    "172T33946": {
+        "make": "Citroen",
+        "model": "MDL03",
+        "color": "Yellow",
+        "class": 3
+    },
+    "181CW32599": {
+        "make": "Ford",
+        "model": "MDL03",
+        "color": "Yellow",
+        "class": 4
+    },
+    "181KK48240": {
+        "make": "Kia",
+        "model": "MDL03",
+        "color": "Red",
+        "class": 7
+    },
+    "181LD7575": {
+        "make": "Opel",
+        "model": "MDL02",
+        "color": "Blue",
+        "class": 7
+    },
+    "181LD18142": {
+        "make": "Hyundai",
+        "model": "MDL02",
+        "color": "Blue",
+        "class": 4
+    },
+    "181KY53312": {
+        "make": "Ford",
+        "model": "MDL01",
+        "color": "Yellow",
+        "class": 5
+    },
+    "182DL77287": {
+        "make": "Hyundai",
+        "model": "MDL05",
+        "color": "Red",
+        "class": 4
+    },
+    "182OY96482": {
+        "make": "Mercedes",
+        "model": "MDL05",
+        "color": "Green",
+        "class": 3
+    },
+    "182MO74208": {
+        "make": "Hyundai",
+        "model": "MDL01",
+        "color": "Black",
+        "class": 1
+    },
+    "182G48192": {
+        "make": "Honda",
+        "model": "MDL05",
+        "color": "Grey",
+        "class": 7
+    },
+    "182C42592": {
+        "make": "Fiat",
+        "model": "MDL05",
+        "color": "Green",
+        "class": 6
+    },
+    "191G95190": {
+        "make": "Nissan",
+        "model": "MDL02",
+        "color": "Multi",
+        "class": 3
+    },
+    "191LM61007": {
+        "make": "Kia",
+        "model": "MDL02",
+        "color": "Blue",
+        "class": 1
+    },
+    "191OY63034": {
+        "make": "Ford",
+        "model": "MDL05",
+        "color": "White",
+        "class": 6
+    },
+    "191D44729": {
+        "make": "Audi",
+        "model": "MDL04",
+        "color": "White",
+        "class": 7
+    },
+    "191WH6750": {
+        "make": "Volkswagen",
+        "model": "MDL01",
+        "color": "Blue",
+        "class": 4
+    },
+    "192T69428": {
+        "make": "Hyundai",
+        "model": "MDL04",
+        "color": "Black",
+        "class": 7
+    },
+    "192CE17358": {
+        "make": "Opel",
+        "model": "MDL02",
+        "color": "Grey",
+        "class": 5
+    },
+    "192KE70459": {
+        "make": "Opel",
+        "model": "MDL01",
+        "color": "Black",
+        "class": 1
+    },
+    "192CN43535": {
+        "make": "Land Rover",
+        "model": "MDL01",
+        "color": "Green",
+        "class": 6
+    },
+    "192G32825": {
+        "make": "Nissan",
+        "model": "MDL05",
+        "color": "Multi",
+        "class": 4
+    },
+    "201WX33667": {
+        "make": "Kia",
+        "model": "MDL02",
+        "color": "Blue",
+        "class": 3
+    },
+    "201MH1445": {
+        "make": "Kia",
+        "model": "MDL04",
+        "color": "Multi",
+        "class": 2
+    },
+    "201LD81886": {
+        "make": "Fiat",
+        "model": "MDL03",
+        "color": "Green",
+        "class": 1
+    },
+    "201MN76303": {
+        "make": "Land Rover",
+        "model": "MDL05",
+        "color": "White",
+        "class": 7
+    },
+    "201WX75545": {
+        "make": "Audi",
+        "model": "MDL05",
+        "color": "Red",
+        "class": 2
+    },
+    "202LD87286": {
+        "make": "Kia",
+        "model": "MDL03",
+        "color": "White",
+        "class": 7
+    },
+    "202L98883": {
+        "make": "Opel",
+        "model": "MDL02",
+        "color": "Red",
+        "class": 1
+    },
+    "202LS49775": {
+        "make": "Mazda",
+        "model": "MDL02",
+        "color": "Yellow",
+        "class": 4
+    },
+    "202LH84538": {
+        "make": "Hyundai",
+        "model": "MDL04",
+        "color": "Grey",
+        "class": 7
+    },
+    "202LM17755": {
+        "make": "Citroen",
+        "model": "MDL04",
+        "color": "Black",
+        "class": 4
+    },
+    "211KE29407": {
+        "make": "Opel",
+        "model": "MDL03",
+        "color": "Yellow",
+        "class": 7
+    },
+    "211RN7586": {
+        "make": "Honda",
+        "model": "MDL05",
+        "color": "Grey",
+        "class": 2
+    },
+    "211L86254": {
+        "make": "BMW",
+        "model": "MDL05",
+        "color": "Blue",
+        "class": 4
+    },
+    "211W44531": {
+        "make": "Mercedes",
+        "model": "MDL01",
+        "color": "Yellow",
+        "class": 7
+    },
+    "211CW17038": {
+        "make": "Ford",
+        "model": "MDL03",
+        "color": "Grey",
+        "class": 2
+    },
+    "212SO75035": {
+        "make": "BMW",
+        "model": "MDL02",
+        "color": "Red",
+        "class": 2
+    },
+    "212CN43340": {
+        "make": "Mercedes",
+        "model": "MDL01",
+        "color": "Red",
+        "class": 3
+    },
+    "212W7719": {
+        "make": "Honda",
+        "model": "MDL04",
+        "color": "Grey",
+        "class": 5
+    },
+    "212CE74836": {
+        "make": "Citroen",
+        "model": "MDL01",
+        "color": "Multi",
+        "class": 3
+    },
+    "212D68422": {
+        "make": "Nissan",
+        "model": "MDL03",
+        "color": "Grey",
+        "class": 2
+    },
+    "221L46758": {
+        "make": "Fiat",
+        "model": "MDL03",
+        "color": "Blue",
+        "class": 7
+    },
+    "221WH31087": {
+        "make": "Fiat",
+        "model": "MDL04",
+        "color": "White",
+        "class": 5
+    },
+    "221WW13403": {
+        "make": "BMW",
+        "model": "MDL04",
+        "color": "Red",
+        "class": 1
+    },
+    "221WW14913": {
+        "make": "Volkswagen",
+        "model": "MDL03",
+        "color": "Grey",
+        "class": 1
+    },
+    "221MN75462": {
+        "make": "Land Rover",
+        "model": "MDL03",
+        "color": "Blue",
+        "class": 4
+    },
+    "222CE16563": {
+        "make": "Citroen",
+        "model": "MDL02",
+        "color": "White",
+        "class": 1
+    },
+    "222MO3333": {
+        "make": "BMW",
+        "model": "MDL02",
+        "color": "White",
+        "class": 4
+    },
+    "222WX15893": {
+        "make": "Citroen",
+        "model": "MDL04",
+        "color": "Yellow",
+        "class": 2
+    },
+    "222LH70411": {
+        "make": "Nissan",
+        "model": "MDL01",
+        "color": "Black",
+        "class": 4
+    },
+    "222KK77628": {
+        "make": "Mercedes",
+        "model": "MDL01",
+        "color": "Blue",
+        "class": 5
+    }
+}

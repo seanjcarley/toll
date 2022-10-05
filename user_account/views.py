@@ -56,14 +56,15 @@ def create_user_profile(request):
     ''' create a new user '''
     if request.method == 'POST':
         try:
-            vehicle = VehicleDetails.objects.get(lpn=request)
+            vehicle = VehicleDetails.objects.get(lpn=request.POST['lpn'])
             form2_data = {
                 'lpn': request.POST['lpn'],
                 'make': vehicle.make,
                 'model': vehicle.model,
                 'color': vehicle.color,
-                'class': vehicle.lpn_class,
+                'lpn_class': vehicle.lpn_class,
             }
+            print(form2_data)
             account_no = create_acc_no()
             form3_data = {
                 'street1': request.POST['street1'],
@@ -80,20 +81,25 @@ def create_user_profile(request):
             form2 = UserVehicleForm(form2_data)
             form3 = UserProfileForm(form3_data)
 
+            print("Form 1 is valid: {}".format(form1.is_valid()))
+            print("Form 2 is valid: {}".format(form2.is_valid()))
+            print("Form 3 is valid: {}".format(form3.is_valid()))
+
 
             if form1.is_valid() and form2.is_valid() and form3.is_valid():
                 form1.save(commit=False)
-                vehicle = form2.save(commit=False)
+                vehiclef = form2.save(commit=False)
                 contact = form3.save(commit=False)
                 contact.account_no = account_no
                 form1.save()
                 contact.user = User.objects.get(username = request.POST['username'])
                 contact.save()
-                vehicle.account = UserProfile.get(user = contact.user)
-                vehicle.save()
+                vehiclef.account = UserProfile.objects.get(user = contact.user)
+                vehiclef.vehicle_id = VehicleDetails.objects.get(lpn = request.POST['lpn'])
+                vehiclef.save()
                 login(request, contact.user)
                 messages.success(request, 'Registration successful!')
-                return redirect('show_user_profile')
+                return redirect('profile')
             else:
                 messages.error(request, 'Registration failed!')
         except VehicleDetails.DoesNotExist:
@@ -119,29 +125,24 @@ def create_user_profile(request):
 
 
 def get_vehicle_info(request):
-    try:
-        if is_ajax(request=request) and request.method == 'GET':
+    if is_ajax(request=request) and request.method == 'GET':
+        try:
             vrn = request.GET.get('lpn', None)
             vquery = Q(lpn=vrn)
             vehicle = VehicleDetails.objects.get(vquery)
             formv_data = {
-                    "lpn": request.GET['lpn'],
-                    "make":  vehicle.make,
-                    "model": vehicle.model,
-                    "color": vehicle.color,
-                    "class": vehicle.lpn_class,
-                }
-            formv = UserVehicleForm(formv_data)
-
-            if formv.is_valid():
-                instance = json.dumps(formv_data)
-                return JsonResponse({"instance": instance}, status=200)
-            else:
-                return JsonResponse({"error": formv.errors}, status=400)
-        return JsonResponse({"error": ""}, status=400)
-    except VehicleDetails.DoesNotExist:
-        messages.error(
-            request, 'The vehicle {} does not exist in the vehicle database!'.format(request.GET.get('lpn')))
+                "lpn": request.GET['lpn'],
+                "make":  vehicle.make,
+                "model": vehicle.model,
+                "color": vehicle.color,
+                "class": vehicle.lpn_class,
+            }
+            instance = json.dumps(formv_data)
+            return JsonResponse({"instance": instance}, status=200)
+        except VehicleDetails.DoesNotExist:
+            messages.error(
+                request, 'The vehicle {} does not exist in the vehicle database!'.format(request.GET.get('lpn')))
+            return JsonResponse({"error": True}, status=400)
 
 
 def create_acc_no():
@@ -154,12 +155,9 @@ def check_user_name(request):
         uname = request.GET.get('username', None)
         print(uname)
         if User.objects.filter(username = uname).exists():
-            print(1)
             return JsonResponse({"valid": False}, status=200)
         else:
-            print(2)
             return JsonResponse({"valid": True}, status=200)
-    print(3)
     return JsonResponse({}, status = 400)
 
 def is_ajax(request):

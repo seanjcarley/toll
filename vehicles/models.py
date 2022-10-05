@@ -39,8 +39,10 @@ class VehicleDetails(models.Model):
     model = models.CharField(max_length=30, null=False, blank=False)
     color = models.CharField(max_length=30, null=False, blank=False)
     lpn_class = models.IntegerField(null=False, blank=False, default=1)
-    start_date = models.DateTimeField(null=False, blank=False)
-    end_date = models.DateTimeField(null=False, blank=False)
+    start_date = models.DateTimeField(
+        null=False, blank=False, 
+        auto_now_add=True)
+    end_date = models.DateTimeField(null=False, blank=False, default='9999-12-31 23:59:59.999')
     update_date = models.DateTimeField(
         null=False, blank=False, 
         auto_now_add=True)

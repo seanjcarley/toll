@@ -353,6 +353,10 @@ section {
     text-transform: uppercase;
 }
 
+.vehicle-modal {
+    list-style-type: none;
+}
+
 .vert-align {
     margin: auto;
 }

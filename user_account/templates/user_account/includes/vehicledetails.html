@@ -1,23 +1,33 @@
-<div class="modal" tabindex="-1" role="dialog">
+<div class="modal" tabindex="-1" role="dialog" id="vehicleModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Vehicle Details for {{ vehicle.lpn }}</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h4 class="modal-title" id="vehicle_title"></h4>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <ul>
-                    <li>make: {{ vehicle.make }}</li>
-                    <li>model: {{ vehicle.model }}</li>
-                    <li>colour: {{ vehicle.color }}</li>
-                    <li>Vehicle Class: {{ vehicle.lpn_class }}</li>
+                <p>Please make sure the details below match your vehicle:</p>
+                <ul class="vehicle-modal">
+                    <li id="vehicle_make"></li>
+                    <li id="vehicle_model"></li>
+                    <li id="vehicle_colour"></li>
+                    <li id="vehicle_class"></li>
                 </ul>
+                <p>
+                    If the details are correct, click "Confirm" below, 
+                    otherwise click "Re-Enter LPN". 
+                </p>
+                <p>
+                    <strong>Please Note:</strong> Only 1 vehicle can be 
+                    added during account setup. Additional vehicles can be 
+                    added by logging in to the account once created.
+                </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Confirm</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Re-Enter LPN</button>
+                <button type="button" class="btn btn-check-lpn" data-bs-dismiss="modal">Confirm</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Re-Enter LPN</button>
             </div>
         </div>
     </div>

@@ -2,10 +2,8 @@ document.getElementById("lpn_check").addEventListener("click", checkLPN);
 
 
 function checkLPN(e) {
-    e.preventDefault();
+    e.preventDefault();  // prevent page reload and default actions 
     var lpn = document.getElementById("id_lpn").value;
-    var pan = document.getElementById("vehicle_panel")
-    console.log(lpn);
     if (lpn.length > 0) {
         $.ajax({
             type: 'GET',
@@ -15,26 +13,20 @@ function checkLPN(e) {
                 var instance = JSON.parse(response["instance"]);
                 if (!response["error"]) {
                     console.log(instance)
-                    $("#lpn_table").prepend(
-                        `<tr>
-                            <td>Vehicle Make: </td>
-                            <td>${instance["make"]}</td>
-                        </tr>
-                        <tr>
-                            <td>Vehicle Model: </td>
-                            <td>${instance["model"]}</td>
-                        </tr>
-                        <tr>
-                            <td>Vehicle Colour: </td>
-                            <td>${instance["color"]}</td>
-                        </tr>
-                        <tr>
-                            <td>Vehicle Class: </td>
-                            <td>${instance["class"]}</td>
-                        </tr>`
-                    )
-                    pan.style.maxHeight = pan.scrollHeight
+                    document.getElementById("vehicle_title").innerHTML = `Vehicle Details for <strong>${instance["lpn"]}</strong>`
+                    document.getElementById("vehicle_make").innerHTML = `Vehicle Make: <strong>${instance["make"]}</strong>`
+                    document.getElementById("vehicle_model").innerHTML = `Vehicle Model: <strong>${instance["model"]}</strong>`
+                    document.getElementById("vehicle_colour").innerHTML = `Vehicle Colour: <strong>${instance["color"]}</strong>`
+                    document.getElementById("vehicle_class").innerHTML = `Vehicle Class: <strong>${instance["class"]}</strong>`
+                    $("#vehicleModal").modal("show")
                 }
+            },
+            error: function (response) {
+                console.log(response);
+                alert("Please check the LPN entered as it is not showing on the Department of Motor Vehicles Database!")
+                var vdeets = $("#id_lpn");
+                vdeets.val("");
+                vdeets.focus();
             }
         })
     }

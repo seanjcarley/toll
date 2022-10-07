@@ -31,30 +31,56 @@
     <div class="row">
         <div class="col-md-6">
             <div class="row">
-                {{ for v in vehicles}}
-                    <div class="col-md-2 offset-1">
-                        {{ v.lpn }}
-                    </div>
-                    <div class="col-md-2">
-                        {{ v.make }}
-                    </div>
-                    <div class="col-md-2">
-                        {{ v.model }}
-                    </div>
-                    <div class="col-md-2">
-                        {{ v.class }}
-                    </div>
-                    <div class="col-md-2">
-                        {{ v.date_added }}
-                    </div>
-                {{ endfor}}
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="center" style="width: 19%">LPN</th>
+                            <th class="center" style="width: 19%">Make</th>
+                            <th class="center" style="width: 19%">Model</th>
+                            <th class="center" style="width: 19%">Class</th>
+                            <th class="center" style="width: 19%">Date Added</th>
+                            <th class="center" style="width: 5%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for v in vehicles %}
+                            <tr>
+                                <td class="center">{{ v.lpn }}</td>
+                                <td class="center">{{ v.make }}</td>
+                                <td class="center">{{ v.model }}</td>
+                                <td class="center">{{ v.lpn_class }}</td>
+                                <td class="center">{{ v.date_added | date:"d/m/Y" }}</td>
+                                <td><input type="checkbox"></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-            <div class="col-md-6">
-                <form enctype="multipart/form-data" action="" method="POST" id="vehicle-form">
-                    
-                </form>
-                {% csrf_token %}
+            <div class="row">
+                
             </div>
         </div>
+        <div class="col-md-6">
+            <form enctype="multipart/form-data" action="" method="POST" id="vehicle-form">
+                {% csrf_token %}
+                <p class="vehicle-details">
+                    Please enter your vehicle registration number and click 
+                    the "Check Vehicle Details" button to confirm. 
+                    <b>Please Note:</b> only vehicles registered in the Republic of 
+                    Ireland can be registered on TOLL.ie.
+                </p>
+                <fieldset>
+                    {{ form2.lpn | as_crispy_field}}
+                    <table class="center" id="lpn_table"></table>
+                    <button class="btn btn-check-lpn" id="lpn_check">Check Vehicle Information</button>                       
+                </fieldset>
+            </form>
+        </div>
     </div>
+    {% include 'user_account/includes/vehicledetails.html' %}
+{% endblock %}
+
+{% block post_load_js %}
+    {{ block.super }}
+    <script src="{% static 'js/check_lpn.js' %}"></script>
 {% endblock %}

@@ -1,13 +1,11 @@
 import json
-from urllib import request
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.core import serializers
 from django.http import JsonResponse
-from .models import UserProfile
+from .models import UserProfile, UserVehicle
 from .forms import UserProfileForm, CreateUserForm, UserVehicleForm
 from vehicles.models import VehicleDetails
 from django.db.models import Q, Max
@@ -49,6 +47,57 @@ def show_user_profile(request):
         'uphone': uphone,
     }
 
+    template = 'user_account/profile.html'
+
+    return render(request, template, context)
+
+
+@login_required
+def show_vehicles(request):
+    ''' show the vehicles on the account and allow new vehicles to be added '''
+    profile1 = get_object_or_404(UserProfile, user=request.user)
+    profile2 = get_object_or_404(User, username=request.user)
+    fname = profile2.first_name
+    vehicles = UserVehicle.objects.filter(
+        account__account_no=profile1.account_no)
+    
+    if request.method == 'POST':
+        try:
+            vehicle = VehicleDetails.objects.get(lpn=request.POST['lpn'])
+            form2_data = {
+                'lpn': request.POST['lpn'],
+                'make': vehicle.make,
+                'model': vehicle.model,
+                'color': vehicle.color,
+                'lpn_class': vehicle.lpn_class,
+            }
+
+            form2 = UserVehicleForm(form2_data)
+
+            if form2.is_valid():
+                vehiclef = form2.save(commit=False)
+                vehiclef.account = profile1.account_no
+                vehiclef.vehicle_id = VehicleDetails.objects.get(
+                    lpn = request.POST['lpn'])
+                vehiclef.save()
+                messages.success(request, 'Vehicle Successfully Added!')
+                return redirect('vehicles')
+
+        except VehicleDetails.DoesNotExist:
+            messages.error(request, 'The vehicle {} does not exist in the \
+                vehicle database!'.format(request.POST['lpn']))
+            form2 = UserVehicleForm()
+    else:
+        form2 = UserVehicleForm()
+
+    context = {
+        'fname': fname,
+        'vehicles': vehicles,
+        'form2': form2,
+    }
+
+    template = 'user_account/vehicle_details.html'
+
     return render(request, template, context)
 
 
@@ -64,7 +113,6 @@ def create_user_profile(request):
                 'color': vehicle.color,
                 'lpn_class': vehicle.lpn_class,
             }
-            print(form2_data)
             account_no = create_acc_no()
             form3_data = {
                 'street1': request.POST['street1'],
@@ -81,21 +129,18 @@ def create_user_profile(request):
             form2 = UserVehicleForm(form2_data)
             form3 = UserProfileForm(form3_data)
 
-            print("Form 1 is valid: {}".format(form1.is_valid()))
-            print("Form 2 is valid: {}".format(form2.is_valid()))
-            print("Form 3 is valid: {}".format(form3.is_valid()))
-
-
             if form1.is_valid() and form2.is_valid() and form3.is_valid():
                 form1.save(commit=False)
                 vehiclef = form2.save(commit=False)
                 contact = form3.save(commit=False)
                 contact.account_no = account_no
                 form1.save()
-                contact.user = User.objects.get(username = request.POST['username'])
+                contact.user = User.objects.get(
+                    username = request.POST['username'])
                 contact.save()
                 vehiclef.account = UserProfile.objects.get(user = contact.user)
-                vehiclef.vehicle_id = VehicleDetails.objects.get(lpn = request.POST['lpn'])
+                vehiclef.vehicle_id = VehicleDetails.objects.get(
+                    lpn = request.POST['lpn'])
                 vehiclef.save()
                 login(request, contact.user)
                 messages.success(request, 'Registration successful!')
@@ -103,7 +148,8 @@ def create_user_profile(request):
             else:
                 messages.error(request, 'Registration failed!')
         except VehicleDetails.DoesNotExist:
-            messages.error(request, 'The vehicle {} does not exist in the vehicle database!'.format(request.POST['lpn']))
+            messages.error(request, 'The vehicle {} does not exist in the \
+                vehicle database!'.format(request.POST['lpn']))
             form1 = CreateUserForm(request.POST)
             form2 = UserVehicleForm()
             form3 = UserProfileForm(request.POST)

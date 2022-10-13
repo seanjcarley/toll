@@ -14,12 +14,10 @@
     </div>
     <div class="row">
         <div class="col-md-10 offset-1">
-            <!-- {{ form2.lpn | as_crispy_field}}
-            <button class="btn btn-check-lpn" id="lpn_check" method="GET" type="submit">Check Vehicle Information</button> -->
             <form enctype="multipart/form-data" class="signup center" method="POST">
                 {% csrf_token %}
-                <button class="accordion" id="login">Log In Details</button>
-                <div class="panel">
+                <button class="accordion" id="acc_login">Log In Details</button>
+                <div class="panel" id="login_panel">
                     <fieldset>
                         <legend></legend>
                         {{ form1.username | as_crispy_field }}
@@ -36,7 +34,7 @@
                         {{ form1.password2 | as_crispy_field}}
                     </fieldset>
                 </div>
-                <button class="accordion" id="vehicle">Vehicle Details</button>
+                <button class="accordion" id="acc_vehicle">Vehicle Details</button>
                 <div class="panel" id="vehicle_panel">
                     <p class="vehicle-details">
                         Please enter your vehicle registration number and click 
@@ -50,8 +48,8 @@
                         <button name="signup" class="btn btn-check-lpn" id="lpn_check">Check Vehicle Information</button>                       
                     </fieldset>
                 </div>
-                <button class="accordion">Contact Details</button>
-                <div class="panel">
+                <button class="accordion" id="acc_contact">Contact Details</button>
+                <div class="panel" id="contact_panel">
                     <fieldset>
                         {{ form1.first_name | as_crispy_field }}
                         {{ form1.last_name | as_crispy_field }}

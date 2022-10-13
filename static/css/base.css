@@ -98,18 +98,18 @@ body {
     
 }
 
-.btn-check-lpn {
+.btn-check-lpn,
+.btn-add-lpn {
     background-color: #990099;
     color: #fff;
     border-style: none;
     margin-bottom: 0.5em;
 }
 
-.btn-check-lpn:hover {
+.btn-check-lpn:hover,
+.btn-add-lpn:hover {
     background-color: #cc00cc;
     color: #c0c0c0;
-    border-style: none;
-    margin-bottom: 0.5em;
 }
 
 .btn-sign-up {
@@ -130,6 +130,10 @@ body {
 .container-fluid {
     margin: 0;
     padding: 0;
+}
+
+.control-label {
+    display: none;
 }
 
 .controls {

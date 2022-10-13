@@ -174,17 +174,24 @@ def get_vehicle_info(request):
     if is_ajax(request=request) and request.method == 'GET':
         try:
             vrn = request.GET.get('lpn', None)
-            vquery = Q(lpn=vrn)
-            vehicle = VehicleDetails.objects.get(vquery)
-            formv_data = {
-                "lpn": request.GET['lpn'],
-                "make":  vehicle.make,
-                "model": vehicle.model,
-                "color": vehicle.color,
-                "class": vehicle.lpn_class,
-            }
-            instance = json.dumps(formv_data)
-            return JsonResponse({"instance": instance}, status=200)
+            # print(vrn)
+            if check_vehicle_registered(vrn):
+                messages.error(
+                request, 'The vehicle {} cannot be registered to your account \
+                    at this time!'.format(request.GET.get('lpn')))
+                return JsonResponse({"valid": False}, status=200)
+            else:
+                vquery = Q(lpn=vrn)
+                vehicle = VehicleDetails.objects.get(vquery)
+                formv_data = {
+                    "lpn": request.GET['lpn'],
+                    "make":  vehicle.make,
+                    "model": vehicle.model,
+                    "color": vehicle.color,
+                    "class": vehicle.lpn_class,
+                }
+                instance = json.dumps(formv_data)
+                return JsonResponse({"valid": True, "instance": instance}, status=200)
         except VehicleDetails.DoesNotExist:
             messages.error(
                 request, 'The vehicle {} does not exist in the vehicle database!'.format(request.GET.get('lpn')))
@@ -197,14 +204,24 @@ def create_acc_no():
 
 
 def check_user_name(request):
-    if is_ajax(request=request) and request.method == 'GET':
+    if is_ajax(request=request):
         uname = request.GET.get('username', None)
-        print(uname)
+        # print(uname)
         if User.objects.filter(username = uname).exists():
             return JsonResponse({"valid": False}, status=200)
         else:
             return JsonResponse({"valid": True}, status=200)
     return JsonResponse({}, status = 400)
+
+
+def check_vehicle_registered(vrn):
+    if UserVehicle.objects.filter(lpn = vrn).exists():
+        # print("LPN {} exists!".format(vrn))
+        return True
+    else:
+        # print("LPN {} doesn't exist!".format(vrn))
+        return False
+
 
 def is_ajax(request):
     return request.META.get("HTTP_X_REQUESTED_WITH") == 'XMLHttpRequest'

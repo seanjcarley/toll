@@ -54,41 +54,13 @@ def show_user_profile(request):
 
 @login_required
 def show_vehicles(request):
-    ''' show the vehicles on the account and allow new vehicles to be added '''
+    ''' show the vehicles on the account '''
     profile1 = get_object_or_404(UserProfile, user=request.user)
     profile2 = get_object_or_404(User, username=request.user)
     fname = profile2.first_name
+    form2 = UserVehicleForm()
     vehicles = UserVehicle.objects.filter(
         account__account_no=profile1.account_no)
-    
-    if request.method == 'POST':
-        try:
-            vehicle = VehicleDetails.objects.get(lpn=request.POST['lpn'])
-            form2_data = {
-                'lpn': request.POST['lpn'],
-                'make': vehicle.make,
-                'model': vehicle.model,
-                'color': vehicle.color,
-                'lpn_class': vehicle.lpn_class,
-            }
-
-            form2 = UserVehicleForm(form2_data)
-
-            if form2.is_valid():
-                vehiclef = form2.save(commit=False)
-                vehiclef.account = profile1.account_no
-                vehiclef.vehicle_id = VehicleDetails.objects.get(
-                    lpn = request.POST['lpn'])
-                vehiclef.save()
-                messages.success(request, 'Vehicle Successfully Added!')
-                return redirect('vehicles')
-
-        except VehicleDetails.DoesNotExist:
-            messages.error(request, 'The vehicle {} does not exist in the \
-                vehicle database!'.format(request.POST['lpn']))
-            form2 = UserVehicleForm()
-    else:
-        form2 = UserVehicleForm()
 
     context = {
         'fname': fname,
@@ -198,6 +170,32 @@ def get_vehicle_info(request):
             return JsonResponse({"error": True}, status=400)
 
 
+@login_required
+def add_vehicle(request):
+    if request.method == "POST":
+        try:
+            vehicle = VehicleDetails.objects.get(lpn=request.POST['lpn'])
+            form2_data = {
+                'lpn': request.POST['lpn'],
+                'make': vehicle.make,
+                'model': vehicle.model,
+                'color': vehicle.color,
+                'lpn_class': vehicle.lpn_class,
+            }
+            form2 = UserVehicleForm(form2_data)
+            vehiclef = form2.save(commit=False)
+            vehiclef.account = UserProfile.objects.get(user = request.user)
+            vehiclef.vehicle_id = VehicleDetails.objects.get(
+                lpn = request.POST['lpn'])
+            vehiclef.save()
+            messages.success(request, 'Vehicle added successfully!')
+            return redirect('vehicles')
+        except:
+            messages.error(request, 'There was an error adding the vehicle\
+                 {}. PLease try again later'.format(request.POST['lpn']))
+            return redirect('profile')
+
+
 def create_acc_no():
     num = User.objects.aggregate(Max('id'))
     return num['id__max'] + 10
@@ -216,10 +214,8 @@ def check_user_name(request):
 
 def check_vehicle_registered(vrn):
     if UserVehicle.objects.filter(lpn = vrn).exists():
-        # print("LPN {} exists!".format(vrn))
         return True
     else:
-        # print("LPN {} doesn't exist!".format(vrn))
         return False
 
 

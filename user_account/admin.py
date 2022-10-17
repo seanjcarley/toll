@@ -14,7 +14,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 class UserVehicleAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'vehicle_id', 'lpn', 'make', 'model', 'color', 'lpn_class', 
+        'id', 'account','vehicle_id', 'lpn', 'make', 'model', 'color', 'lpn_class', 
         'date_added', 'date_removed', 'update_date',
     )
 

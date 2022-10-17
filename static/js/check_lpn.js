@@ -1,4 +1,5 @@
 document.getElementById("lpn_check").addEventListener("click", checkLPN);
+document.getElementById("confirm").addEventListener("click", confirmLPN)
 document.getElementById("re-enter").addEventListener("click", clearField);
 
 function checkLPN(e) {
@@ -46,11 +47,16 @@ function checkLPN(e) {
             }
         })
     }
-}
+};
+
+function confirmLPN(e) {
+    document.getElementById("lpn_check").style.display = "none"
+    document.getElementById("add_vehicle").style.display = "block"
+};
 
 function clearField() {
     // clear and refocus on the field
     var vdeets = $("#id_lpn");
     vdeets.val("");
     vdeets.focus();
-}
+};

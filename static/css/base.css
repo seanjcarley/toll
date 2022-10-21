@@ -98,6 +98,14 @@ body {
     
 }
 
+.btn-bottom {
+    margin-bottom: .5em;
+}
+
+.btn-center {
+    margin: auto;
+}
+
 .btn-check-lpn,
 .btn-add-lpn {
     background-color: #990099;
@@ -106,8 +114,12 @@ body {
     margin-bottom: 0.5em;
 }
 
-.btn-check-lpn:hover,
 .btn-add-lpn:hover {
+    background-color: Green;
+    color: #c0c0c0;
+}
+
+.btn-check-lpn:hover {
     background-color: #cc00cc;
     color: #c0c0c0;
 }
@@ -190,6 +202,11 @@ footer {
 
 .h-100 {
     height: 88%!important;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+    margin-top: 0.5rem;
 }
 
 header {

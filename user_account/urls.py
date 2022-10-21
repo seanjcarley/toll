@@ -8,4 +8,5 @@ urlpatterns = [
     path('vehicleinfo', views.get_vehicle_info, name='vehicleinfo'),
     path('checkusername', views.check_user_name, name='checkusername'),
     path('addvehicle', views.add_vehicle, name='addvehicle'),
+    path('removevehicles', views.remove_vehicles, name='removevehicles'),
 ]

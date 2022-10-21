@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import JsonResponse
+from django.utils import timezone
 from .models import UserProfile, UserVehicle
 from .forms import UserProfileForm, CreateUserForm, UserVehicleForm
 from vehicles.models import VehicleDetails
@@ -57,19 +58,23 @@ def show_vehicles(request):
     ''' show the vehicles on the account '''
     profile1 = get_object_or_404(UserProfile, user=request.user)
     profile2 = get_object_or_404(User, username=request.user)
+    acc_query = Q(account__account_no=profile1.account_no)
+    rmvd_query = Q(date_removed__isnull=True)
+    rmvd2_query = Q(date_removed__isnull=False)
+
     fname = profile2.first_name
     form2 = UserVehicleForm()
-    vehicles = UserVehicle.objects.filter(
-        account__account_no=profile1.account_no)
+    vehicles = UserVehicle.objects.filter(acc_query & rmvd_query)
+    r_vehicles = UserVehicle.objects.filter(rmvd2_query)
 
     context = {
         'fname': fname,
         'vehicles': vehicles,
+        'r_vehicles': r_vehicles,
         'form2': form2,
     }
 
     template = 'user_account/vehicle_details.html'
-
     return render(request, template, context)
 
 
@@ -153,8 +158,9 @@ def get_vehicle_info(request):
                     at this time!'.format(request.GET.get('lpn')))
                 return JsonResponse({"valid": False}, status=200)
             else:
-                vquery = Q(lpn=vrn)
-                vehicle = VehicleDetails.objects.get(vquery)
+                vrnquery = Q(lpn=vrn)
+                rmvdquery = Q(date_removed__isnull=True)
+                vehicle = VehicleDetails.objects.get(vrnquery & rmvdquery)
                 formv_data = {
                     "lpn": request.GET['lpn'],
                     "make":  vehicle.make,
@@ -192,7 +198,7 @@ def add_vehicle(request):
             return redirect('vehicles')
         except:
             messages.error(request, 'There was an error adding the vehicle\
-                 {}. PLease try again later'.format(request.POST['lpn']))
+                 {}. PLease try again later.'.format(request.POST['lpn']))
             return redirect('profile')
 
 
@@ -210,6 +216,21 @@ def check_user_name(request):
         else:
             return JsonResponse({"valid": True}, status=200)
     return JsonResponse({}, status = 400)
+
+
+@login_required
+def remove_vehicles(request):
+    if request.method == 'POST':
+        lpn = []
+        checked_data = request.POST.getlist('active_checkbox')
+    for v in checked_data:
+        lpn.append(v.split("_")[1])
+    for l in lpn:
+        vehicle = UserVehicle.objects.get(lpn=l)
+        vehicle.date_removed = timezone.now()
+        vehicle.save()
+
+    return redirect('vehicles')
 
 
 def check_vehicle_registered(vrn):

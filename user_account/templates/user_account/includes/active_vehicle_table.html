@@ -1,0 +1,27 @@
+<form id="active_vehicle_form" action="{% url 'removevehicles' %}" method="POST">
+    {% csrf_token %}
+    <table class="active_table">
+        <thead>
+            <tr>
+                <th class="center" style="width: 19%">LPN</th>
+                <th class="center" style="width: 19%">Make</th>
+                <th class="center" style="width: 19%">Model</th>
+                <th class="center" style="width: 19%">Class</th>
+                <th class="center" style="width: 19%">Date Added</th>
+                <th class="center" style="width: 5%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for v in vehicles %}
+                <tr>
+                    <td class="center">{{ v.lpn }}</td>
+                    <td class="center">{{ v.make }}</td>
+                    <td class="center">{{ v.model }}</td>
+                    <td class="center">{{ v.lpn_class }}</td>
+                    <td class="center">{{ v.date_added | date:"d/m/Y" }}</td>
+                    <td><input name="active_checkbox" type="checkbox" value="checkbox_{{ v.lpn }}"></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>

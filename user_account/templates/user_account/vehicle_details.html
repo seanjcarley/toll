@@ -25,33 +25,8 @@
     <div class="row">
         <div class="col-md-6">
             <div class="row">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="center" style="width: 19%">LPN</th>
-                            <th class="center" style="width: 19%">Make</th>
-                            <th class="center" style="width: 19%">Model</th>
-                            <th class="center" style="width: 19%">Class</th>
-                            <th class="center" style="width: 19%">Date Added</th>
-                            <th class="center" style="width: 5%"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for v in vehicles %}
-                            <tr>
-                                <td class="center">{{ v.lpn }}</td>
-                                <td class="center">{{ v.make }}</td>
-                                <td class="center">{{ v.model }}</td>
-                                <td class="center">{{ v.lpn_class }}</td>
-                                <td class="center">{{ v.date_added | date:"d/m/Y" }}</td>
-                                <td><input type="checkbox"></td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="row">
-                
+                {% include 'user_account/includes/active_vehicle_table.html' %}
+                <hr>
             </div>
         </div>
         <div class="col-md-6">
@@ -61,13 +36,36 @@
                 <b>Please Note:</b> only vehicles registered in the Republic of 
                 Ireland can be registered on TOLL.ie.
             </p>    
-            <form enctype="multipart/form-data" action="{% url 'addvehicle' %}" method="POST">
+            <form id="vehicle_form" enctype="multipart/form-data" action="{% url 'addvehicle' %}" method="POST">
                 {% csrf_token %}
                 {{ form2.lpn | as_crispy_field}}
-                <button class="btn btn-check-lpn" id="lpn_check" style="display: block;">Check Vehicle Information</button>
-                <button class="btn btn-add-lpn" type="submit" id="add_vehicle" style="display: none;">Add Vehicle</button>
+                <!-- <button class="btn btn-check-lpn btn-center btn-bottom" id="lpn_check" style="display: block;">Check Vehicle Information</button> -->
+                <!-- <button class="btn btn-add-lpn btn-center btn-bottom" type="submit" id="add_vehicle" style="display: none;">Add Vehicle</button> -->
             </form>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button class="btn btn-remove-lpn btn-center btn-danger" type="submit" form="active_vehicle_form" id="lpn_remove" style="display: block;">Remove Selected Vehicles</button>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-check-lpn btn-center btn-bottom" id="lpn_check" style="display: block;">Check Vehicle Information</button>
+            <button class="btn btn-add-lpn btn-center btn-bottom" type="submit" form="vehicle_form" id="add_vehicle" style="display: none;">Add Vehicle</button>
+        </div>
+    </div>
+    <div class="row">
+        <hr>
+        <div class="col-md-6">
+            <h4 class="center">Inactive Vehicles</h4>
+        </div>
+        <div class="col-md-6"></div>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {% include 'user_account/includes/inactive_vehicle_table.html' %}
+        </div>
+        <div class="col-md-6"></div>
     </div>
     {% include 'user_account/includes/vehicledetails.html' %}
 {% endblock %}

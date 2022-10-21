@@ -1,6 +1,7 @@
 document.getElementById("lpn_check").addEventListener("click", checkLPN);
 document.getElementById("confirm").addEventListener("click", confirmLPN)
 document.getElementById("re-enter").addEventListener("click", clearField);
+// document.getElementById("lpn_remove").addEventListener("click", removeLPN);
 
 function checkLPN(e) {
     e.preventDefault();  // prevent page reload and default actions 
@@ -53,6 +54,14 @@ function confirmLPN(e) {
     document.getElementById("lpn_check").style.display = "none"
     document.getElementById("add_vehicle").style.display = "block"
 };
+
+function removeLPN(e) {
+    for (v in vehicles) {
+        if (document.getElementById(`checkbox_${v.lpn}`).checked == true) {
+            console.log(v.lpn);
+        }
+    }
+}
 
 function clearField() {
     // clear and refocus on the field

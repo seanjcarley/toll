@@ -1,0 +1,22 @@
+<table class="inactive_table">
+    <thead>
+        <tr>
+            <th class="center" style="width: 20%">LPN</th>
+            <th class="center" style="width: 20%">Make</th>
+            <th class="center" style="width: 20%">Model</th>
+            <th class="center" style="width: 20%">Date Added</th>
+            <th class="center" style="width: 20%">Date Removed</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rv in r_vehicles %}
+            <tr>
+                <td class="center">{{ rv.lpn }}</td>
+                <td class="center">{{ rv.make }}</td>
+                <td class="center">{{ rv.model }}</td>
+                <td class="center">{{ rv.date_added | date:"d/m/Y" }}</td>
+                <td class="center">{{ rv.date_removed | date:"d/m/Y" }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

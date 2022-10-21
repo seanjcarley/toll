@@ -100,3 +100,29 @@ class UserVehicleForm(forms.ModelForm):
         for field in self.fields:
             if field != 'lpn':
                 self.fields[field].widget = forms.HiddenInput()
+
+
+class UserActiveVehiclesForm(forms.ModelForm):
+    remove_field = forms.BooleanField(required=False)
+    class Meta:
+        model = UserVehicle
+        exclude = ('account','vehicle_id', 'date_added', 'date_removed', 
+                    'update_date')
+        fields = ('lpn', 'make', 'model','color','lpn_class','remove_field')
+
+    def __init__(self, *args, **kwargs):
+        ''' add placeholders and classes, remove auto-generated labels and
+        set auto-focus '''
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'lpn': 'Vehicle Licence Plate Number',
+            'make': 'Vehicle Make',
+            'model': 'Vehicle Model',
+            'color': 'Vehicle Colour',
+            'lpn_class': 'Vehicle Class',
+            'remove_field': 'Remove Vehicle'
+        }
+        for field in self.fields:
+            if field != 'remove_field':
+                self.fields[field].widget.attrs['placeholder'] = placeholders[field]
+            

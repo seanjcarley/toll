@@ -9,4 +9,5 @@ urlpatterns = [
     path('checkusername', views.check_user_name, name='checkusername'),
     path('addvehicle', views.add_vehicle, name='addvehicle'),
     path('removevehicles', views.remove_vehicles, name='removevehicles'),
+    path('journeys', views.show_journeys, name='journeys'),
 ]

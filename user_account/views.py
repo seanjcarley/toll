@@ -78,6 +78,23 @@ def show_vehicles(request):
     return render(request, template, context)
 
 
+@login_required
+def show_journeys(request):
+    ''' show the journeys made by the vehicles on the account '''
+    profile1 = get_object_or_404(UserProfile, user=request.user)
+    profile2 = get_object_or_404(User, username=request.user)
+    acc_query = Q(account__account_no=profile1.account_no)
+    fname = profile2.first_name
+
+    context = {
+        'fname': fname,
+    }
+    
+    template = 'user_account/journey_details.html'
+    
+    return render(request, template, context)
+
+
 def create_user_profile(request):
     ''' create a new user '''
     if request.method == 'POST':

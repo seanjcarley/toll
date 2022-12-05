@@ -16,11 +16,56 @@
             <div class="col">
                 <h4 class="center">Search Previous Journeys</h4>
             </div>
-            <hr>
         </div>
         <div class="row">
             <div class="col">
-
+                {% for j in journeys %}
+                <h5>{{ j }}</h5>
+                {% endfor %}
+                <table class="jrny_table">
+                    <thead>
+                        <th class="center" style="width: 15%">Vehicle LPN</th>
+                        <th class="center" style="width: 15%">Date of Journey</th>
+                        <th class="center" style="width: 15%">Date Charged to Account</th>
+                        <th class="center" style="width: 15%">Toll Road</th>
+                        <th class="center" style="width: 15%">Direction</th>
+                        <th class="center" style="width: 15%">Toll Charged</th>
+                        <th class="center" style="width: 10%">Paid</th>
+                        <hr>
+                    </thead>
+                    <tbody>
+                        {% for j in journeys %}
+                        <tr>
+                            <td class="center">{{ j.vehicle_ID.lpn }}</td>
+                            <td class="center">{{ j.trip_date | date:"d/m/y H:i:s" }}</td>
+                            <td class="center">{{ j.post_date | date:"d/m/Y" }}</td>
+                            <td class="center">{{ j.toll_road_detailsID.road_name }}</td>
+                            <td class="center">{{ j.toll_road_detailsID.road_toll_point_dir }}bound</td>
+                            <td class="center">
+                                {% with vehicleclass=j.vehicle_ID.lpn_class %}
+                                    {% if vehicleclass == 1 %}
+                                        €{{ j.toll_road_detailsID.toll_charges_id.class_1_charge }}
+                                    {% elif vehicleclass == 2 %}
+                                        €{{ j.toll_road_detailsID.toll_charges_id.class_2_charge }}
+                                    {% elif vehicleclass == 3 %}
+                                        €{{ j.toll_road_detailsID.toll_charges_id.class_3_charge }}
+                                    {% elif vehicleclass == 4 %}
+                                        €{{ j.toll_road_detailsID.toll_charges_id.class_4_charge }}
+                                    {% elif vehicleclass == 5 %}
+                                        €{{ j.toll_road_detailsID.toll_charges_id.class_5_charge }}
+                                    {% elif vehicleclass == 6 %}
+                                        €{{ j.toll_road_detailsID.toll_charges_id.class_6_charge }}
+                                    {% else %}
+                                        €{{ j.toll_road_detailsID.toll_charges_id.class_7_charge }}
+                                    {% endif %}
+                                {% endwith %}
+                            </td>
+                            <td class="center">{{ j.paid }}</td>
+                        </tr>
+                        {% endfor %}     
+                    </tbody>
+                </table>
+                <hr>
             </div>
         </div>
     </div>

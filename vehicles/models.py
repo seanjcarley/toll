@@ -1,6 +1,6 @@
-from importlib.util import module_for_loader
 from django.db import models
 from django_countries.fields import CountryField
+from datetime import datetime, timedelta
 
 # Create your models here.
 class VehicleOwnerDetails(models.Model):
@@ -31,6 +31,9 @@ class VehicleDetails(models.Model):
         verbose_name_plural = 'VehicleDetails'
 
     
+    def set_future_datetime():
+        return datetime.now() + timedelta(weeks=520)
+    
     owner = models.ForeignKey(
         VehicleOwnerDetails, null=False, 
         blank=False, on_delete=models.CASCADE)
@@ -42,10 +45,11 @@ class VehicleDetails(models.Model):
     start_date = models.DateTimeField(
         null=False, blank=False, 
         auto_now_add=True)
-    end_date = models.DateTimeField(null=False, blank=False, default='9999-12-31 23:59:59.999')
+    end_date = models.DateTimeField(null=False, blank=False, 
+                default=set_future_datetime())
     update_date = models.DateTimeField(
         null=False, blank=False, 
-        auto_now_add=True)
+        auto_now=True)
     seq_no = models.IntegerField(null=False, blank=False, default=1)
     scrapped = models.BooleanField(default=False)
 

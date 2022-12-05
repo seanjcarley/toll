@@ -9,6 +9,7 @@ from django.utils import timezone
 from .models import UserProfile, UserVehicle
 from .forms import UserProfileForm, CreateUserForm, UserVehicleForm
 from vehicles.models import VehicleDetails
+from journey.models import JourneyDetails, TollChargeDetails, TollRoadDetails
 from django.db.models import Q, Max
 
 
@@ -83,13 +84,23 @@ def show_journeys(request):
     ''' show the journeys made by the vehicles on the account '''
     profile1 = get_object_or_404(UserProfile, user=request.user)
     profile2 = get_object_or_404(User, username=request.user)
-    acc_query = Q(account__account_no=profile1.account_no)
     fname = profile2.first_name
-
+    jrny_query = Q(user_ID=profile1.user)
+    vehicles = JourneyDetails.objects.filter(jrny_query).order_by().values(
+                'vehicle_ID').distinct()
+    print(vehicles)
+    journeys = {}
+    for v in vehicles:
+        veh = JourneyDetails.objects.filter(vehicle_ID=v['vehicle_ID'])
+        print('veh: ',veh)
+        journeys[veh.lpn] = JourneyDetails.objects.filter(
+                                    'vehicle_ID').order_by('trip_date')
+    
     context = {
         'fname': fname,
+        'journeys': journeys,
     }
-    
+
     template = 'user_account/journey_details.html'
     
     return render(request, template, context)

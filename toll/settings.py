@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'home',
     'user_account',
     'vehicles',
+    'journey',
 ]
 
 MIDDLEWARE = [

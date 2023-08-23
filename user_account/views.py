@@ -87,17 +87,16 @@ def show_journeys(request):
     fname = profile2.first_name
     jrny_query = Q(user_ID=profile1.user)
     vehicles = JourneyDetails.objects.filter(jrny_query).order_by().values(
-                'vehicle_ID').distinct()
-    print(vehicles)
-    journeys = {}
-    for v in vehicles:
-        veh = JourneyDetails.objects.filter(vehicle_ID=v['vehicle_ID'])
-        print('veh: ',veh)
-        journeys[veh.lpn] = JourneyDetails.objects.filter(
-                                    'vehicle_ID').order_by('trip_date')
+                'vehicle_ID', 'vehicle_ID__lpn').distinct()
     
+    print(vehicles)
+
+    journeys = JourneyDetails.objects.filter(jrny_query).order_by('-vehicle_ID', '-trip_date')
+
+    print(journeys)
     context = {
         'fname': fname,
+        'vehicles': vehicles,
         'journeys': journeys,
     }
 

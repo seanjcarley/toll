@@ -31,7 +31,8 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # DEBUG = True
 DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '8000-seanjcarley-toll-wbg5tazcf60.ws-eu105.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8000-seanjcarley-toll-wbg5tazcf60.ws-eu105.gitpod.io', 'http://127.0.0.1:8000']
 
 
 # Application definition
